@@ -1,4 +1,4 @@
-package com.pepperoniapptemplate;
+package com.simpleoffsetpro;
 
 import android.app.Application;
 

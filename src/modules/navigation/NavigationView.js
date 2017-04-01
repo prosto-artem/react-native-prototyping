@@ -13,7 +13,7 @@ import AppRouter from '../AppRouter';
 import TabBar from '../../components/TabBar';
 
 // Customize bottom tab bar height here if desired
-const TAB_BAR_HEIGHT = 50;
+const TAB_BAR_HEIGHT = 70;
 
 class NavigationView extends Component {
   static displayName = 'NavigationView';

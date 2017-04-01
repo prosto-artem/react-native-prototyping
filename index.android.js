@@ -5,7 +5,7 @@ import React, {Component} from 'react';
 import {AppRegistry, BackAndroid} from 'react-native';
 import * as NavigationStateActions from './src/modules/navigation/NavigationState';
 
-class PepperoniAppTemplate extends Component {
+class SimpleOffsetPRO extends Component {
   componentWillMount() {
     BackAndroid.addEventListener('hardwareBackPress', this.navigateBack);
   }
@@ -42,4 +42,4 @@ class PepperoniAppTemplate extends Component {
   }
 }
 
-AppRegistry.registerComponent('PepperoniAppTemplate', () => PepperoniAppTemplate);
+AppRegistry.registerComponent('SimpleOffsetPRO', () => SimpleOffsetPRO);

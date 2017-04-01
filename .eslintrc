@@ -23,7 +23,7 @@
   "rules": {
     "indent": [2, 2, {"SwitchCase": 1}],
     "quotes": [2,"single"],
-    "linebreak-style": [2,"unix"],
+    "linebreak-style": [2,"windows"],
     "semi": [2,"always"],
     "no-console": 0,
     "max-len": [1,110],
@@ -96,7 +96,7 @@
     "no-multi-spaces": 2,
     "no-multi-str": 2,
     "no-new": 2,
-    "no-param-reassign": 2,
+    "no-param-reassign": [2, { "props": false }],
     "no-proto": 2,
     "no-redeclare": 2,
     "no-return-assign": 2,
