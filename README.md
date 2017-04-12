@@ -1,5 +1,5 @@
 # simple-offset-pro
-An attempt of a react-native re-hash of a mobile app I developed originally in Android.
+react-native re-hash of an app originally developed in Android.
 
 Environment Setup and Build
 https://facebook.github.io/react-native/docs/getting-started.html#content
