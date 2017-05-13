@@ -34,7 +34,8 @@ const initialState = fromJS({
     index: 0,
     routes: [
       {key: 'HomeTab', title: 'HOME'},
-      {key: 'ProfileTab', title: 'PROFILE'}
+      {key: 'ProfileTab', title: 'PROFILE'},
+      {key: 'OffsetTab', title: 'OFFSET'}
     ]
   },
   // Scenes for the `HomeTab` tab.
@@ -46,6 +47,11 @@ const initialState = fromJS({
   ProfileTab: {
     index: 0,
     routes: [{key: 'Color', title: 'Color Screen'}]
+  },
+  // Scenes for the `OffsetTab` tab.
+  OffsetTab: {
+    index: 0,
+    routes: [{key: 'Offset', title: 'Offset Calculate'}]
   }
 });
 

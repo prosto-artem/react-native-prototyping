@@ -3,7 +3,7 @@
 import React from 'react';
 import CounterViewContainer from './counter/CounterViewContainer';
 import ColorViewContainer from './colors/ColorViewContainer';
-import SquareOffsetViewContainer from './squareOffset/SquareOffsetViewContainer';
+import SquareOffsetViewContainer from '.squareOffset/SquareOffsetViewContainer';
 
 /**
  * AppRouter is responsible for mapping a navigator scene to a view
@@ -13,6 +13,10 @@ export default function AppRouter(props) {
 
   if (key === 'Counter') {
     return <CounterViewContainer />;
+  }
+
+  if (key === 'Offset') {
+    return <SquareOffsetViewContainer />;
   }
 
   if (key.indexOf('Color') === 0) {
