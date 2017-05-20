@@ -22,9 +22,10 @@ class SquareOffsetView extends Component {
   render() {
     return (
         <View style={styles.container}>
-          <Image
-            source={{uri: 'http://d23dyxeqlo5psv.cloudfront.net/cat.gif'}}
-            style={{height: 250, width: 300}}
+         <Image
+            style={{flex: 1, height: undefined, width: undefined}}
+            source={require('../../../../images/diagram2-1.png')}
+            resizeMode='contain'
           />
           <TextInput
             value={this.state.setValue}
