@@ -1,23 +1,29 @@
-import React, {Component} from 'react';
+import React, {Component, PropTypes} from 'react';
 import {View, StyleSheet, Image, TextInput} from 'react-native';
 import FloatLabelTextInput from 'react-native-floating-label-text-input';
 
 class SquareOffsetView extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      setValue: 0,
-      travelValue: 0,
-      runValue: 0
-    };
-    this._handleTextChange = this._handleTextChange.bind(this);
-  }
+  static propTypes = {
+    setValue: PropTypes.number.isRequired,
+    travelValue: PropTypes.number.isRequired,
+    runValue: PropTypes.number.isRequired,
+    loading: PropTypes.bool.isRequired,
+    squareOffsetStateActions: PropTypes.shape({
+      calculate: PropTypes.func.isRequired,
+      reset: PropTypes.func.isRequired
+    }).isRequired,
+    navigationStateActions: PropTypes.shape({
+      pushRoute: PropTypes.func.isRequired
+    }).isRequired
+  };
 
-  _handleTextChange(e) {
-    var change = {};
-    change[e.target.name] = e.target.value;
-    this.setState(change);
-  }
+  increment = () => {
+    this.props.squareOffsetStateActions.calculate();
+  };
+
+  reset = () => {
+    this.props.squareOffsetStateActions.reset();
+  };
 
   render() {
     return (
@@ -28,24 +34,24 @@ class SquareOffsetView extends Component {
             resizeMode='contain'
           />
           <TextInput
-            value={this.state.setValue}
+            value={this.props.setValue}
             keyboardType='numeric'
             name='setValue'
-            onChangeText={this._handleTextChange}
+            onChangeText={this.calculate}
             style={{width: 200, height: 44, padding: 8}}
           />
           <TextInput
-            value={this.state.travelValue}
+            value={this.props.travelValue}
             keyboardType='numeric'
             name='travelValue'
-            onChangeText={this._handleTextChange}
+            onChangeText={this.calculate}
             style={{width: 200, height: 44, padding: 8}}
           />
           <TextInput
-            value={this.state.runValue}
+            value={this.props.runValue}
             keyboardType='numeric'
             name='runValue'
-            onChangeText={this._handleTextChange}
+            onChangeText={this.calculate}
             style={{width: 200, height: 44, padding: 8}}
           />
           <FloatLabelTextInput
