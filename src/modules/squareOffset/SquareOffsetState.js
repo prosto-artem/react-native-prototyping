@@ -1,6 +1,6 @@
 import {Map} from 'immutable';
 import {loop, Effects} from 'redux-loop-symbol-ponyfill';
-import {calculateSquareOffset} from '../../services/offsetCalculateService';
+import {calculateSetTravelRun} from '../../services/offsetCalculateService';
 
 // Initial state
 const initialState = Map({
@@ -19,7 +19,7 @@ const RESET = 'SquareOffsetState/RESET';
 export function calculate() {
   return {
     type: CALCULATE,
-    payload: calculateSquareOffset()
+    payload: calculateSetTravelRun()
   };
 }
 
@@ -31,21 +31,13 @@ export function reset() {
 export default function SquareOffsetStateReducer(state = initialState, action = {}) {
   switch (action.type) {
     case CALCULATE:
-      return state.update('value', value => value + 1);
+      return loop(
+        state.set('loading', true),
+        Effects.promise(calculateSetTravelRun)
+      );
 
     case RESET:
       return initialState;
-
-    case RANDOM_REQUEST:
-      return loop(
-        state.set('loading', true),
-        Effects.promise(requestRandomNumber)
-      );
-
-    case RANDOM_RESPONSE:
-      return state
-        .set('loading', false)
-        .set('value', action.payload);
 
     default:
       return state;

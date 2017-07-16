@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react';
-import {View, StyleSheet, Image, TextInput} from 'react-native';
+import {View, StyleSheet, Image, TextInput, TouchableOpacity, Text} from 'react-native';
 import FloatLabelTextInput from 'react-native-floating-label-text-input';
 
 class SquareOffsetView extends Component {
@@ -17,7 +17,7 @@ class SquareOffsetView extends Component {
     }).isRequired
   };
 
-  increment = () => {
+  calculate = () => {
     this.props.squareOffsetStateActions.calculate();
   };
 
@@ -58,7 +58,14 @@ class SquareOffsetView extends Component {
           placeholder={'name of field'}
           value={'value of field'}
         />
-
+        <TouchableOpacity
+            accessible={true}
+            accessibilityLabel={'Reset Form'}
+            onPress={this.reset}>
+          <Text style={styles.linkButton}>
+            Reset
+          </Text>
+        </TouchableOpacity>
         </View>
     );
   }
@@ -72,6 +79,12 @@ const styles = StyleSheet.create({
     paddingTop: '20%',
     paddingBottom: '20%',
     backgroundColor: '#ecf0f1'
+  },
+  linkButton: {
+    textAlign: 'center',
+    color: '#CCCCCC',
+    marginBottom: 10,
+    padding: 5
   }
 });
 export default SquareOffsetView;
