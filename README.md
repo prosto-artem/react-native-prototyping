@@ -36,6 +36,7 @@ https://facebook.github.io/react-native/docs/getting-started.html#content
 | Error | Fix |
 | --- | --- |
 | error “Could not get BatchedBridge, make sure your bundle is packaged properly” | On device select Dismiss, shake device (opens Developer menu) -> Dev Settings -> Choose Debug server host & port for device (computers IP address and the port: 192.168.0.xx:8xxx, port is usually :8081) |
+| error “device - unauthorized” on adb devices | Settings -> Developer Options -> Revoke USB debugging authorisations -> adb kill server -> adb start server -> adb devices |
 
 
 
