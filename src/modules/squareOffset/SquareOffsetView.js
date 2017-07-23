@@ -4,9 +4,9 @@ import FloatLabelTextInput from 'react-native-floating-label-text-input';
 
 class SquareOffsetView extends Component {
   static propTypes = {
-    setValue: PropTypes.number.isRequired,
-    travelValue: PropTypes.number.isRequired,
-    runValue: PropTypes.number.isRequired,
+    set: PropTypes.number.isRequired,
+    travel: PropTypes.number.isRequired,
+    run: PropTypes.number.isRequired,
     loading: PropTypes.bool.isRequired,
     squareOffsetStateActions: PropTypes.shape({
       calculate: PropTypes.func.isRequired,
@@ -18,7 +18,8 @@ class SquareOffsetView extends Component {
   };
 
   calculate = () => {
-    this.props.squareOffsetStateActions.calculate();
+    this.props.squareOffsetStateActions.calculate(this.state.set,
+      this.state.travel, this.state.run);
   };
 
   reset = () => {
@@ -34,21 +35,21 @@ class SquareOffsetView extends Component {
             resizeMode='contain'
           />
           <TextInput
-            value={this.props.setValue}
+            value={this.props.set}
             keyboardType='numeric'
             name='setValue'
             onChangeText={this.calculate}
             style={{width: 200, height: 44, padding: 8}}
           />
           <TextInput
-            value={this.props.travelValue}
+            value={this.props.travel}
             keyboardType='numeric'
             name='travelValue'
             onChangeText={this.calculate}
             style={{width: 200, height: 44, padding: 8}}
           />
           <TextInput
-            value={this.props.runValue}
+            value={this.props.run}
             keyboardType='numeric'
             name='runValue'
             onChangeText={this.calculate}

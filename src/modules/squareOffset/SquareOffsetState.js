@@ -4,9 +4,9 @@ import {calculateSetTravelRun} from '../../services/offsetCalculateService';
 
 // Initial state
 const initialState = Map({
-  rise: 0,
-  length: 0,
-  height: 0,
+  set: 0,
+  travel: 0,
+  run: 0,
   calcResult: [],
   loading: false
 });
@@ -16,10 +16,10 @@ const CALCULATE = 'SquareOffsetState/CALCULATE';
 const RESET = 'SquareOffsetState/RESET';
 
 // Action creators
-export function calculate() {
+export function calculate(set,travel,run) {
   return {
     type: CALCULATE,
-    payload: calculateSetTravelRun()
+    payload: set,travel,run
   };
 }
 
@@ -31,10 +31,13 @@ export function reset() {
 export default function SquareOffsetStateReducer(state = initialState, action = {}) {
   switch (action.type) {
     case CALCULATE:
-      return loop(
-        state.set('loading', true),
-        Effects.promise(calculateSetTravelRun)
-      );
+      Object.assign({}, state, {
+        calcResult = calculateSetTravelRun(action.payload),
+        set: calcResult[0],
+        travel: calcResult[1],
+        run: calcResult[2]
+      });
+      break;
 
     case RESET:
       return initialState;
