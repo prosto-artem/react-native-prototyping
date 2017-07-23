@@ -35,6 +35,12 @@ export function calculateRollingOffset(setback,travel,offset,rise,angle) {
 
   let setBackTemp, travelTemp, offsetTemp, riseTemp, angleTemp;
 
+  setBackTemp = setback;
+  travelTemp = travel;
+  offsetTemp = offset;
+  riseTemp = rise;
+  angleTemp = angle;
+
   if (offsetTemp && riseTemp && angleTemp)
   {
     var trueOffset;
@@ -71,14 +77,21 @@ export function calculateSquareOffset(rise,length,height) {
   let riseTemp;
   let lengthTemp;
   let heightTemp;
+
+  riseTemp = rise;
+  lengthTemp = length;
+  heightTemp = height;
+
   if (riseTemp && lengthTemp && heightTemp)
   {
     triRad = Math.atan(heightTemp / lengthTemp); // triRad is radians
     triDeg = triRad * 180.0 / Math.PI; // triDeg is degrees
     cutA = Math.sqrt(Math.pow(1.0 * lengthTemp,2) + Math.pow(1.0 * heightTemp,2));
+
     triDeg2 = (180.0 - triDeg) / 2.0; // triDeg2 is degrees
     triRad2 = triDeg2 * Math.PI / 180.0; // triRad2 is radians
     cutB = 1.0 * riseTemp / Math.tan(triRad2);
+
     cutC = cutB * 2;
 
     return [cutA,cutB,cutC];
