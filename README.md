@@ -14,7 +14,7 @@ https://facebook.github.io/react-native/docs/getting-started.html#content
 1. Run `react-native run-android` in a new terminal from root directory. 
 
 
-## Handy Commands
+## Useful Commands
 
 | Command | Output |
 | --- | --- |
