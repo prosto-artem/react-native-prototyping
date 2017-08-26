@@ -4,7 +4,7 @@ The aim of this repo is to improve the original application and deploy in both i
 
 We have forked this project from the [pepperoni-app-kit](https://github.com/futurice/pepperoni-app-kit) as a starting boilerplate.
 
-Environment Setup and Build
+## Environment Setup
 https://facebook.github.io/react-native/docs/getting-started.html#content
 
 ## Getting Started
