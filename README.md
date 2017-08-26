@@ -1,5 +1,8 @@
 # simple-offset-pro
-react-native re-hash of an app originally developed in Android.
+A react-native implementation of one of my portfolio apps originally developed in Android.
+The aim of this repo is to improve the original application and deploy in both iOS and Android platforms. 
+
+We have forked this project from the [pepperoni-app-kit](https://github.com/futurice/pepperoni-app-kit) as a starting boilerplate.
 
 Environment Setup and Build
 https://facebook.github.io/react-native/docs/getting-started.html#content
@@ -7,7 +10,7 @@ https://facebook.github.io/react-native/docs/getting-started.html#content
 ## Getting Started
 
 1. Ensure you've followed the [React Native - Get Started Guide](https://facebook.github.io/react-native/docs/getting-started.html) for the platform/s of choice
-1. Clone this project `git clone https://github.com/mcnamee/react-native-starter-app.git`
+1. Clone this project `git clone https://github.com/BrianJVarley/simple-offset-pro.git`
 1. Run `npm install` from root directory
 1. [Prepare Device or Emulator for a deploy](https://developer.android.com/training/basics/firstapp/running-app.html) 
 1. Run `react-native -start` from root directory
