@@ -32,7 +32,7 @@ export default function SquareOffsetStateReducer(state = initialState, action = 
   switch (action.type) {
     case CALCULATE:
       Object.assign({}, state, {
-        calcResult = calculateSetTravelRun(action.payload),
+        calcResult : calculateSetTravelRun(action.payload),
         set: calcResult[0],
         travel: calcResult[1],
         run: calcResult[2]

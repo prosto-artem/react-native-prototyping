@@ -31,7 +31,7 @@ class SquareOffsetView extends Component {
         <View style={styles.container}>
          <Image
             style={{flex: 1, height: undefined, width: undefined}}
-            source={require('../../../../images/diagram2-1.png')}
+            source={require('../../../images/diagram2-1.png')}
             resizeMode='contain'
           />
           <TextInput
