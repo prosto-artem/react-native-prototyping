@@ -41,6 +41,7 @@ https://facebook.github.io/react-native/docs/getting-started.html#content
 | error “Could not get BatchedBridge, make sure your bundle is packaged properly” | On device select Dismiss, shake device (opens Developer menu) -> Dev Settings -> Choose Debug server host & port for device (computers IP address and the port: 192.168.0.xx:8xxx, port is usually :8081) |
 | error “device - unauthorized” on adb devices | Settings -> Developer Options -> Revoke USB debugging authorisations -> adb kill server -> adb start server -> adb devices |
 | error "A problem occurred configuring project ':app'.> The SDK directory '/home/brian/Android/SDK' does not exist." | Add file `local.properties` in project Android folder with value `sdk.dir = /home/Username/Android/Sdk` | 
+| error "INSTALL_FAILED_UPDATE_INCOMPATIBLE: Package com.simpleoffsetpro signatures do not match the previously installed version;"| You need to uninstall the app on your device because you are using a different signature than the original. | 
 
 
 
