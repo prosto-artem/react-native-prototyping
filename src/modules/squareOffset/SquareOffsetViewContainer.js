@@ -1,7 +1,7 @@
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as NavigationStateActions from '../navigation/NavigationState';
-import * as SquareOffStateActions from '../squareOffset/SquareOffsetState';
+import * as squareOffsetStateActions from '../squareOffset/SquareOffsetState';
 import SquareOffsetView from './SquareOffsetView';
 
 export default connect(
@@ -15,7 +15,7 @@ export default connect(
    dispatch => {
      return {
        navigationStateActions: bindActionCreators(NavigationStateActions, dispatch),
-       squareOffStateActions: bindActionCreators(SquareOffStateActions, dispatch)
+       squareOffsetStateActions: bindActionCreators(squareOffsetStateActions, dispatch)
      };
    }
 )(SquareOffsetView);

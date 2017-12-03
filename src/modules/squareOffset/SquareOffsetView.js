@@ -26,6 +26,7 @@ class SquareOffsetView extends Component {
     this.props.squareOffsetStateActions.reset();
   };
 
+
   render() {
     return (
         <View style={styles.container}>
@@ -62,8 +63,8 @@ class SquareOffsetView extends Component {
         <TouchableOpacity
             accessible={true}
             accessibilityLabel={'Reset Form'}
-            onPress={this.reset}>
-          <Text style={styles.linkButton}>
+            onPress={this.reset.bind(this)}>          
+            <Text style={styles.linkButton}>
             Reset
           </Text>
         </TouchableOpacity>
