@@ -42,6 +42,7 @@ https://facebook.github.io/react-native/docs/getting-started.html#content
 | error “device - unauthorized” on adb devices | Settings -> Developer Options -> Revoke USB debugging authorisations -> adb kill server -> adb start server -> adb devices |
 | error "A problem occurred configuring project ':app'.> The SDK directory '/home/brian/Android/SDK' does not exist." | Add file `local.properties` in project Android folder with value `sdk.dir = /home/Username/Android/Sdk` | 
 | error "INSTALL_FAILED_UPDATE_INCOMPATIBLE: Package com.simpleoffsetpro signatures do not match the previously installed version;"| You need to uninstall the app on your device because you are using a different signature than the original. | 
+| error "Couldn't get batched bridge, make sure your package is bundled correctly" | Run command `react-native start` to start the react native packager. Followed by `react-native run-android` |
 
 
 
