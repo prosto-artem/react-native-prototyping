@@ -22,9 +22,10 @@ class SquareOffsetView extends Component {
     this.props.squareOffsetStateActions.increment();
   };
 
+  // TODO: Debug action - reducer setup for this action
   calculate = () => {
-    this.props.squareOffsetStateActions.calculate(this.state.set,
-      this.state.travel, this.state.run);
+    this.props.squareOffsetStateActions.calculate(this.props.set,
+      this.props.travel, this.props.run);
   };
 
   reset = () => {
