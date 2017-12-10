@@ -43,6 +43,8 @@ https://facebook.github.io/react-native/docs/getting-started.html#content
 | error "A problem occurred configuring project ':app'.> The SDK directory '/home/brian/Android/SDK' does not exist." | Add file `local.properties` in project Android folder with value `sdk.dir = /home/Username/Android/Sdk` | 
 | error "INSTALL_FAILED_UPDATE_INCOMPATIBLE: Package com.simpleoffsetpro signatures do not match the previously installed version;"| You need to uninstall the app on your device because you are using a different signature than the original. | 
 | error "Couldn't get batched bridge, make sure your package is bundled correctly" | Run command `react-native start` to start the react native packager. Followed by `react-native run-android` |
+|error "Unable to connect with remote debugger" | Run adb reverse tcp:8081 tcp:8081 -> Paste http://localhost:8081/debugger-ui into the address field of browser. -> You should see the normal debugging screen but your app will still not be connected -> Close and uninstall the app from your Android device -> Reinstall the app with react-native run-android -> Enable remote debugging on your app.|
+
 
 
 
