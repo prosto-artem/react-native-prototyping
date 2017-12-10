@@ -12,10 +12,15 @@ const initialState = Map({
 });
 
 // Actions
+const INCREMENT = 'SquareOffsetState/INCREMENT';
 const CALCULATE = 'SquareOffsetState/CALCULATE';
 const RESET = 'SquareOffsetState/RESET';
 
 // Action creators
+export function increment() {
+  return {type: INCREMENT};
+}
+
 export function calculate(set,travel,run) {
   return {
     type: CALCULATE,
@@ -30,6 +35,13 @@ export function reset() {
 // Reducer
 export default function SquareOffsetStateReducer(state = initialState, action = {}) {
   switch (action.type) {
+    case INCREMENT:
+      return state.update(state, {
+        set: {$set: state.set + 1},
+        travel: {$travel: state.travel + 1},
+        run: {$run: state.run + 1}        
+      });
+     
     case CALCULATE:
       Object.assign({}, state, {
         calcResult : calculateSetTravelRun(action.payload),

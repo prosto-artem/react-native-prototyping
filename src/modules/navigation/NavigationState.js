@@ -51,7 +51,7 @@ const initialState = fromJS({
   // Scenes for the `OffsetTab` tab.
   OffsetTab: {
     index: 0,
-    routes: [{key: 'Offset', title: 'Offset Calculate'}]
+    routes: [{key: 'Offset', title: 'Set/Travel/Run Calculate'}]
   }
 });
 

@@ -6,9 +6,9 @@ import SquareOffsetView from './SquareOffsetView';
 
 export default connect(
   state => ({
-    rise: state.getIn(['squareOffset', 'rise']),
-    length: state.getIn(['squareOffset', 'length']),
-    height: state.getIn(['squareOffset', 'height']),
+    set: state.getIn(['squareOffset', 'set']),
+    travel: state.getIn(['squareOffset', 'travel']),
+    run: state.getIn(['squareOffset', 'run']),
     calcResult: state.getIn(['squareOffset', 'calcResult']),
     loading: state.getIn(['squareOffset', 'loading'])
   }),

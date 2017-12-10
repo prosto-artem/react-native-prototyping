@@ -9,12 +9,17 @@ class SquareOffsetView extends Component {
     run: PropTypes.number.isRequired,
     loading: PropTypes.bool.isRequired,
     squareOffsetStateActions: PropTypes.shape({
+      increment: PropTypes.func.isRequired,      
       calculate: PropTypes.func.isRequired,
       reset: PropTypes.func.isRequired
     }).isRequired,
     navigationStateActions: PropTypes.shape({
       pushRoute: PropTypes.func.isRequired
     }).isRequired
+  };
+
+  increment = () => {
+    this.props.squareOffsetStateActions.increment();
   };
 
   calculate = () => {
@@ -63,7 +68,7 @@ class SquareOffsetView extends Component {
         <TouchableOpacity
             accessible={true}
             accessibilityLabel={'Reset Form'}
-            onPress={this.reset.bind(this)}>          
+            onPress={this.reset}>          
             <Text style={styles.linkButton}>
             Reset
           </Text>

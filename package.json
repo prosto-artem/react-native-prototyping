@@ -1,7 +1,7 @@
 {
-  "name": "SimpleOffsetPRO",
-  "author": "Futurice",
-  "description": "React Native App Starter Kit for Android and iOS",
+  "name": "Simple-Offset-PRO",
+  "author": "BrianJVarley",
+  "description": "Simple Offset app derived from the React Native App Starter Kit for Android and iOS",
   "license": "MIT",
   "homepage": "http://getpepperoni.com",
   "bugs": "https://github.com/futurice/pepperoni-app-kit/issues",
