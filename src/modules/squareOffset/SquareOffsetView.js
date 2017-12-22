@@ -37,9 +37,8 @@ class SquareOffsetView extends Component {
     return (
         <View style={styles.container}>
          <Image
-            style={{flex: 1, height: undefined, width: undefined}}
-            source={require('../../../images/diagram2-1.png')}
-            resizeMode='contain'
+            style={styles.image}
+            source={require('../../images/diagram2-1.png')}
           />
           <TextInput
             value={this.props.set}
@@ -79,6 +78,7 @@ class SquareOffsetView extends Component {
   }
   }
 
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -93,6 +93,12 @@ const styles = StyleSheet.create({
     color: '#CCCCCC',
     marginBottom: 10,
     padding: 5
+  },
+  image: {
+    flex: 1,
+    resizeMode: 'contain',
+    width: 800,
+    height: 800,
   }
 });
 export default SquareOffsetView;
