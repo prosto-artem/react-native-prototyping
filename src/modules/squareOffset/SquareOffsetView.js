@@ -40,35 +40,32 @@ class SquareOffsetView extends Component {
             style={styles.image}
             source={require('../../images/diagram2-1.png')}
           />
-          <TextInput
-            value={this.props.set}
-            keyboardType='numeric'
-            name='setValue'
-            onChangeText={this.calculate}
-            style={{width: 200, height: 44, padding: 8}}
-          />
-          <TextInput
-            value={this.props.travel}
-            keyboardType='numeric'
-            name='travelValue'
-            onChangeText={this.calculate}
-            style={{width: 200, height: 44, padding: 8}}
-          />
-          <TextInput
-            value={this.props.run}
-            keyboardType='numeric'
-            name='runValue'
-            onChangeText={this.calculate}
-            style={{width: 200, height: 44, padding: 8}}
+          <FloatLabelTextInput
+          placeholder={'Run'}
+          value={this.props.run}
+          onChangeText={this.calculate}
+          keyboardType= 'numeric'
+          style={styles.floatLabelTextInput}
           />
           <FloatLabelTextInput
-          placeholder={'name of field'}
-          value={'value of field'}
-        />
+          value={this.props.travel}
+          placeholder={'Travel'}
+          onChangeText={this.calculate}
+          keyboardType= 'numeric'
+          style={styles.floatLabelTextInput}
+          />
+          <FloatLabelTextInput
+          value={this.props.set}
+          placeholder={'Set'}
+          onChangeText={this.calculate}
+          keyboardType= 'numeric'
+          style={styles.floatLabelTextInput}
+          />
         <TouchableOpacity
             accessible={true}
             accessibilityLabel={'Reset Form'}
-            onPress={this.reset}>          
+            onPress={this.reset}
+            style={styles.touchableOpacity}>          
             <Text style={styles.linkButton}>
             Reset
           </Text>
@@ -82,10 +79,9 @@ class SquareOffsetView extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
+    flexDirection:"column",
+    //alignItems: 'center',
     justifyContent: 'space-between',
-    paddingTop: '20%',
-    paddingBottom: '20%',
     backgroundColor: '#ecf0f1'
   },
   linkButton: {
@@ -96,9 +92,18 @@ const styles = StyleSheet.create({
   },
   image: {
     flex: 1,
-    resizeMode: 'contain',
+    resizeMode: 'cover',
     width: 800,
     height: 800,
+  },
+  floatLabelTextInput: {
+    padding: 8,
+  },
+  touchableOpacity: {
+    backgroundColor: '#ff5733',
+    maxWidth: 80,
+    alignSelf: 'center',
+    paddingTop: 5,
   }
 });
 export default SquareOffsetView;
