@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react';
-import {View, StyleSheet, Image, TextInput, TouchableOpacity, Text} from 'react-native';
+import {View,Dimensions, StyleSheet, Image, TouchableOpacity, Text} from 'react-native';
 import FloatLabelTextInput from 'react-native-floating-label-text-input';
 
 class SquareOffsetView extends Component {
@@ -9,7 +9,7 @@ class SquareOffsetView extends Component {
     run: PropTypes.number.isRequired,
     loading: PropTypes.bool.isRequired,
     squareOffsetStateActions: PropTypes.shape({
-      increment: PropTypes.func.isRequired,      
+      increment: PropTypes.func.isRequired,
       calculate: PropTypes.func.isRequired,
       reset: PropTypes.func.isRequired
     }).isRequired,
@@ -41,8 +41,8 @@ class SquareOffsetView extends Component {
             source={require('../../images/diagram2-1.png')}
           />
           <FloatLabelTextInput
-          placeholder={'Run'}
-          value={this.props.run}
+          value={this.props.set}
+          placeholder={'Set'}
           onChangeText={this.calculate}
           keyboardType= 'numeric'
           style={styles.floatLabelTextInput}
@@ -55,8 +55,8 @@ class SquareOffsetView extends Component {
           style={styles.floatLabelTextInput}
           />
           <FloatLabelTextInput
-          value={this.props.set}
-          placeholder={'Set'}
+          placeholder={'Run'}
+          value={this.props.run}
           onChangeText={this.calculate}
           keyboardType= 'numeric'
           style={styles.floatLabelTextInput}
@@ -65,7 +65,7 @@ class SquareOffsetView extends Component {
             accessible={true}
             accessibilityLabel={'Reset Form'}
             onPress={this.reset}
-            style={styles.touchableOpacity}>          
+            style={styles.touchableOpacity}>     
             <Text style={styles.linkButton}>
             Reset
           </Text>
@@ -74,15 +74,15 @@ class SquareOffsetView extends Component {
     );
   }
   }
-
-
+const ScreenWidth = Dimensions.get('window').width;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection:"column",
-    //alignItems: 'center',
+    flexDirection: 'column',
     justifyContent: 'space-between',
-    backgroundColor: '#ecf0f1'
+    backgroundColor: '#ecf0f1',
+    padding: 12,
+    margin: 10
   },
   linkButton: {
     textAlign: 'center',
@@ -91,19 +91,18 @@ const styles = StyleSheet.create({
     padding: 5
   },
   image: {
-    flex: 1,
-    resizeMode: 'cover',
-    width: 800,
-    height: 800,
+    flex: 2.5,
+    maxWidth: ScreenWidth,
+    borderColor: '#888',
+    marginBottom: 5
   },
   floatLabelTextInput: {
-    padding: 8,
+    alignSelf: 'stretch'
   },
   touchableOpacity: {
     backgroundColor: '#ff5733',
-    maxWidth: 80,
     alignSelf: 'center',
-    paddingTop: 5,
+    margin: 10
   }
 });
 export default SquareOffsetView;

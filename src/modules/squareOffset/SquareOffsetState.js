@@ -36,19 +36,17 @@ export function reset() {
 export default function SquareOffsetStateReducer(state = initialState, action = {}) {
   switch (action.type) {
     case INCREMENT:
-      console.log("INCREMENT reducer..");
       return state.update(state, {
         set: {$set: state.set + 1},
         travel: {$travel: state.travel + 1},
-        run: {$run: state.run + 1}        
-      });
-     
+        run: {$run: state.run + 1}   
+      }); 
     case CALCULATE:
       Object.assign({}, state, {
-        calcResult : calculateSetTravelRun(action.payload),
-        set: calcResult[0],
-        travel: calcResult[1],
-        run: calcResult[2]
+        calcResult: calculateSetTravelRun(action.payload),
+        set: action.payload[0],
+        travel: action.payload[1],
+        run: action.payload[2]
       });
       break;
 
