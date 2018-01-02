@@ -31,6 +31,7 @@ https://facebook.github.io/react-native/docs/getting-started.html#content
 | gradlew compileDebug --stacktrace | Add stacktrace logging to gradle config |
 | react-native -start  | Starts the react-native dev server |
 | react-native run-android | Builds and deployes the app to listening Android device or emulator |
+| watchman shutdown-server | Shuts down watchman server in event of error |
 
 
 
