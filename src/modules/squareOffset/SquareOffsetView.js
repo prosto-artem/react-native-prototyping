@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import {View,Dimensions, StyleSheet, Image, TouchableOpacity, Text} from 'react-native';
 import FloatLabelTextInput from 'react-native-floating-label-text-input';
+import {Button} from 'native-base';
 
 class SquareOffsetView extends Component {
   static propTypes = {
@@ -32,7 +33,6 @@ class SquareOffsetView extends Component {
     this.props.squareOffsetStateActions.reset();
   };
 
-
   render() {
     return (
         <View style={styles.container}>
@@ -61,15 +61,15 @@ class SquareOffsetView extends Component {
           keyboardType= 'numeric'
           style={styles.floatLabelTextInput}
           />
-        <TouchableOpacity
+        <Button rounded warning
             accessible={true}
             accessibilityLabel={'Reset Form'}
             onPress={this.reset}
-            style={styles.touchableOpacity}>     
-            <Text style={styles.linkButton}>
+            style={{alignSelf: 'center', marginTop: 5}}>  
+            <Text>
             Reset
           </Text>
-        </TouchableOpacity>
+        </Button>
         </View>
     );
   }
@@ -99,10 +99,9 @@ const styles = StyleSheet.create({
   floatLabelTextInput: {
     alignSelf: 'stretch'
   },
-  touchableOpacity: {
-    backgroundColor: '#ff5733',
-    alignSelf: 'center',
-    margin: 10
+  button: {
+    marginTop: 5,
+    alignSelf: 'center'
   }
 });
 export default SquareOffsetView;

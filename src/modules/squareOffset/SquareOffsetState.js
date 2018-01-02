@@ -39,8 +39,9 @@ export default function SquareOffsetStateReducer(state = initialState, action = 
       return state.update(state, {
         set: {$set: state.set + 1},
         travel: {$travel: state.travel + 1},
-        run: {$run: state.run + 1}   
-      }); 
+        run: {$run: state.run + 1}
+      });
+      /* falls through */
     case CALCULATE:
       Object.assign({}, state, {
         calcResult: calculateSetTravelRun(action.payload),
@@ -48,11 +49,9 @@ export default function SquareOffsetStateReducer(state = initialState, action = 
         travel: action.payload[1],
         run: action.payload[2]
       });
-      break;
-
+      /* falls through */
     case RESET:
       return initialState;
-
     default:
       return state;
   }
