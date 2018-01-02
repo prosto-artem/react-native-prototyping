@@ -81,8 +81,8 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'space-between',
     backgroundColor: '#ecf0f1',
-    padding: 12,
-    margin: 10
+    padding: 5,
+    margin: 5
   },
   linkButton: {
     textAlign: 'center',
