@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react';
-import {View,Dimensions, StyleSheet, Image, TouchableOpacity, Text} from 'react-native';
+import {View,Dimensions, StyleSheet, Image, Text} from 'react-native';
 import FloatLabelTextInput from 'react-native-floating-label-text-input';
-import {Button} from 'native-base';
+import {Button,Badge,Icon,Content} from 'native-base';
 
 class SquareOffsetView extends Component {
   static propTypes = {
@@ -40,6 +40,9 @@ class SquareOffsetView extends Component {
             style={styles.image}
             source={require('../../images/diagram2-1.png')}
           />
+          <Badge primary style={{marginBottom: 5}}>
+            <Text style={{fontSize: 15, color: '#fff', lineHeight: 21}}>Input 2 values</Text>
+          </Badge>
           <FloatLabelTextInput
           value={this.props.set}
           placeholder={'Set'}
@@ -61,15 +64,24 @@ class SquareOffsetView extends Component {
           keyboardType= 'numeric'
           style={styles.floatLabelTextInput}
           />
-        <Button rounded warning
-            accessible={true}
-            accessibilityLabel={'Reset Form'}
-            onPress={this.reset}
-            style={{alignSelf: 'center', marginTop: 5}}>  
-            <Text>
-            Reset
-          </Text>
-        </Button>
+          <Content style={{flexDirection: 'column'}}>
+          <Button iconLeft primary
+              accessible={true}
+              accessibilityLabel={'Calculate result'}
+              style={{alignSelf: 'center', marginTop: 5}}> 
+              <Icon name='calculator' />
+              <Text>
+              Calculate
+            </Text>
+          </Button>
+          <Button small warning
+              accessible={true}
+              accessibilityLabel={'Reset form'}
+              onPress={this.reset}
+              style={{alignSelf: 'center', marginTop: 5}}>  
+              <Icon name='trash'/>              
+          </Button>
+          </Content>
         </View>
     );
   }
@@ -99,9 +111,15 @@ const styles = StyleSheet.create({
   floatLabelTextInput: {
     alignSelf: 'stretch'
   },
+  buttonContainer: {
+    flexDirection: 'column'
+  },
   button: {
     marginTop: 5,
-    alignSelf: 'center'
+    //alignSelf: 'center'
+  },
+  infoText: {
+    paddingLeft: 5
   }
 });
 export default SquareOffsetView;
