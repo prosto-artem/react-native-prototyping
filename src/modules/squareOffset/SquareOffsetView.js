@@ -64,11 +64,10 @@ class SquareOffsetView extends Component {
           keyboardType= 'numeric'
           style={styles.floatLabelTextInput}
           />
-          <Content style={{flexDirection: 'column'}}>
+          <View style={styles.buttonView}>
           <Button iconLeft primary
               accessible={true}
-              accessibilityLabel={'Calculate result'}
-              style={{alignSelf: 'center', marginTop: 5}}> 
+              accessibilityLabel={'Calculate result'} >
               <Icon name='calculator' />
               <Text>
               Calculate
@@ -78,10 +77,10 @@ class SquareOffsetView extends Component {
               accessible={true}
               accessibilityLabel={'Reset form'}
               onPress={this.reset}
-              style={{alignSelf: 'center', marginTop: 5}}>  
-              <Icon name='trash'/>              
+              style={{marginLeft: 4}}>
+              <Icon name='trash'/>          
           </Button>
-          </Content>
+          </View>
         </View>
     );
   }
@@ -111,8 +110,11 @@ const styles = StyleSheet.create({
   floatLabelTextInput: {
     alignSelf: 'stretch'
   },
-  buttonContainer: {
-    flexDirection: 'column'
+  buttonView: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    marginTop: 8
   },
   button: {
     marginTop: 5,
