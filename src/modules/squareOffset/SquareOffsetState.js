@@ -1,5 +1,4 @@
 import {Map} from 'immutable';
-import {loop, Effects} from 'redux-loop-symbol-ponyfill';
 import {calculateSetTravelRun} from '../../services/offsetCalculateService';
 
 // Initial state
@@ -7,7 +6,6 @@ const initialState = Map({
   set: 0,
   travel: 0,
   run: 0,
-  calcResult: [],
   loading: false
 });
 
@@ -24,7 +22,7 @@ export function increment() {
 export function calculate(set,travel,run) {
   return {
     type: CALCULATE,
-    payload: set,travel,run
+    payload: calculateSetTravelRun(set,travel,run)
   };
 }
 
@@ -39,20 +37,18 @@ export default function SquareOffsetStateReducer(state = initialState, action = 
       return initialState;
 
     case INCREMENT:
-      return state.update(state, {
-        set: {$set: state.set + 1},
-        travel: {$travel: state.travel + 1},
-        run: {$run: state.run + 1}
-      });
-      /* falls through */
+      return state
+      .set('set', set => set + 1)
+      .set('travel', travel => travel + 1)
+      .set('run', run => run + 1);
+
     case CALCULATE:
-      Object.assign({}, state, {
-        calcResult: calculateSetTravelRun(action.payload),
-        set: action.payload[0],
-        travel: action.payload[1],
-        run: action.payload[2]
+      return Object.assign({}, state, {
+        set: action.payload.set,
+        travel: action.payload.travel,
+        run: action.payload.run
       });
-      /* falls through */
+
     default:
       return state;
   }

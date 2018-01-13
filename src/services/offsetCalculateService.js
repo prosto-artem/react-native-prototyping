@@ -1,6 +1,8 @@
 export function calculateSetTravelRun(set,travel,run) {
 
-  let setTemp, travelTemp, runTemp;
+  let setTemp;
+  let travelTemp;
+  let runTemp;
   setTemp = set;
   travelTemp = travel;
   runTemp = run;
@@ -10,22 +12,22 @@ export function calculateSetTravelRun(set,travel,run) {
     {
       runTemp = Math.pow(setTemp, 2) + Math.pow(travelTemp, 2);
       runTemp = Math.sqrt(runTemp);
-      return [setTemp,travelTemp,runTemp];
+      return {set: setTemp,travel: travelTemp,run: runTemp};
     }
     else if (setTemp && runTemp)
     {
       travelTemp = Math.pow(setTemp, 2) + Math.pow(runTemp, 2);
       travelTemp = Math.sqrt(travelTemp);
-      return [setTemp,travelTemp,runTemp];
+      return {set: setTemp,travel: travelTemp,run: runTemp};
     }
     else if (travelTemp && runTemp)
     {
       setTemp = Math.pow(travelTemp, 2) + Math.pow(runTemp, 2);
       setTemp = Math.sqrt(setTemp);
-      return [setTemp,travelTemp,runTemp];
+      return {set: setTemp,travel: travelTemp,run: runTemp};
     }
   }
-  return [];
+  return {};
 }
 
 export function calculateRollingOffset(setback,travel,offset,rise,angle) {
@@ -33,7 +35,11 @@ export function calculateRollingOffset(setback,travel,offset,rise,angle) {
   const setbackConstants = {'60': 0.577, '45': 1.000, '22.5': 2.414};
   const travelConstants = {'60': 1.155, '45': 1.414, '22.5': 2.613};
 
-  let setBackTemp, travelTemp, offsetTemp, riseTemp, angleTemp;
+  let setBackTemp;
+  let travelTemp;
+  let offsetTemp;
+  let riseTemp;
+  let angleTemp;
 
   setBackTemp = setback;
   travelTemp = travel;

@@ -9,7 +9,7 @@ describe('SquareOffsetState', () => {
 
 
   describe('reset', () => {
-    it('should reset the set value state to initial value', () => {
+    it('should reset state to initial values', () => {
       // create an incremented state to test against
       const [modifiedState] = dispatch(initialState, SquareOffsetStateActions.increment());
       expect(modifiedState.get('set')).not.toBe(initialState.get('set'));
@@ -18,7 +18,7 @@ describe('SquareOffsetState', () => {
       
 
       // reset to original and verify it === initial state
-      const [resetState] = dispatch(modifiedState, CounterStateActions.reset());
+      const [resetState] = dispatch(modifiedState, SquareOffsetStateActions.reset());
       expect(resetState.get('set')).toBe(initialState.get('set'));
       expect(resetState.get('travel')).toBe(initialState.get('travel'));
       expect(resetState.get('run')).toBe(initialState.get('run'));

@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import {View,Dimensions, StyleSheet, Image, Text} from 'react-native';
 import FloatLabelTextInput from 'react-native-floating-label-text-input';
-import {Button,Badge,Icon,Content} from 'native-base';
+import {Button,Badge,Icon} from 'native-base';
 
 class SquareOffsetView extends Component {
   static propTypes = {
@@ -29,6 +29,7 @@ class SquareOffsetView extends Component {
       this.props.travel, this.props.run);
   };
 
+  // TODO: Debug action - reducer setup for this action
   reset = () => {
     this.props.squareOffsetStateActions.reset();
   };
@@ -46,28 +47,26 @@ class SquareOffsetView extends Component {
           <FloatLabelTextInput
           value={this.props.set}
           placeholder={'Set'}
-          onChangeText={this.calculate}
           keyboardType= 'numeric'
           style={styles.floatLabelTextInput}
           />
           <FloatLabelTextInput
           value={this.props.travel}
           placeholder={'Travel'}
-          onChangeText={this.calculate}
-          keyboardType= 'numeric'
+          keyboardType= 'numeric'          
           style={styles.floatLabelTextInput}
           />
           <FloatLabelTextInput
           placeholder={'Run'}
           value={this.props.run}
-          onChangeText={this.calculate}
           keyboardType= 'numeric'
           style={styles.floatLabelTextInput}
           />
           <View style={styles.buttonView}>
           <Button iconLeft primary
               accessible={true}
-              accessibilityLabel={'Calculate result'} >
+              accessibilityLabel={'Calculate result'}
+              onPress={this.calculate} >
               <Icon name='calculator' />
               <Text>
               Calculate
@@ -115,10 +114,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     marginTop: 8
-  },
-  button: {
-    marginTop: 5,
-    //alignSelf: 'center'
   },
   infoText: {
     paddingLeft: 5

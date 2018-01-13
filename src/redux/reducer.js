@@ -7,16 +7,12 @@ import SessionStateReducer, {RESET_STATE} from '../modules/session/SessionState'
 
 const reducers = {
   // Counter sample app state. This can be removed in a live application
-  counter: CounterStateReducer,
-  
+  counter: CounterStateReducer, 
   // @NOTE: By convention, the navigation state must live in a subtree called
   //`navigationState`
   navigationState: NavigationStateReducer,
-
   session: SessionStateReducer,
-
   squareOffset: SquareOffsetStateReducer
-
 };
 
 // initial state, accessor and mutator for supporting root-level

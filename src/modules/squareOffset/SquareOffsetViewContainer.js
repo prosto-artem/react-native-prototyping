@@ -9,7 +9,6 @@ export default connect(
     set: state.getIn(['squareOffset', 'set']),
     travel: state.getIn(['squareOffset', 'travel']),
     run: state.getIn(['squareOffset', 'run']),
-    calcResult: state.getIn(['squareOffset', 'calcResult']),
     loading: state.getIn(['squareOffset', 'loading'])
   }),
    dispatch => {
