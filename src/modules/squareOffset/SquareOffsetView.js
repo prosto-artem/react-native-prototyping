@@ -1,18 +1,21 @@
 import React, {Component, PropTypes} from 'react';
-import {View,Dimensions, StyleSheet, Image, Text} from 'react-native';
+import {View,Dimensions, StyleSheet, Image, Text, TouchableOpacity,TouchableHighlight} from 'react-native';
+import Overlay from 'react-native-overlay';
 import FloatLabelTextInput from 'react-native-floating-label-text-input';
 import {Button,Badge,Icon} from 'native-base';
 
 class SquareOffsetView extends Component {
   static propTypes = {
-    set: PropTypes.number.isRequired,
-    travel: PropTypes.number.isRequired,
-    run: PropTypes.number.isRequired,
+    set: PropTypes.number,
+    travel: PropTypes.number,
+    run: PropTypes.number,
     loading: PropTypes.bool.isRequired,
+    isVisible: PropTypes.bool.isRequired,
     squareOffsetStateActions: PropTypes.shape({
       increment: PropTypes.func.isRequired,
       calculate: PropTypes.func.isRequired,
-      reset: PropTypes.func.isRequired
+      reset: PropTypes.func.isRequired,
+      setVisibility: PropTypes.func.isRequired
     }).isRequired,
     navigationStateActions: PropTypes.shape({
       pushRoute: PropTypes.func.isRequired
@@ -23,10 +26,16 @@ class SquareOffsetView extends Component {
     this.props.squareOffsetStateActions.increment();
   };
 
+  setVisibility = () => {
+    this.props.squareOffsetStateActions.setVisibility();
+  };
+
   // TODO: Debug action - reducer setup for this action
   calculate = () => {
-    this.props.squareOffsetStateActions.calculate(this.props.set,
-      this.props.travel, this.props.run);
+
+    console.log('props: ' + this.props.set);
+    // this.props.squareOffsetStateActions.calculate(this.props.set,
+    //   this.props.travel, this.props.run);
   };
 
   // TODO: Debug action - reducer setup for this action
@@ -37,10 +46,12 @@ class SquareOffsetView extends Component {
   render() {
     return (
         <View style={styles.container}>
+         <TouchableOpacity style={styles.image} onPress={this.calculate}>
          <Image
             style={styles.image}
             source={require('../../images/diagram2-1.png')}
           />
+          </TouchableOpacity >
           <Badge primary style={{marginBottom: 5}}>
             <Text style={{fontSize: 15, color: '#fff', lineHeight: 21}}>Input 2 values</Text>
           </Badge>
@@ -53,7 +64,7 @@ class SquareOffsetView extends Component {
           <FloatLabelTextInput
           value={this.props.travel}
           placeholder={'Travel'}
-          keyboardType= 'numeric'          
+          keyboardType= 'numeric'         
           style={styles.floatLabelTextInput}
           />
           <FloatLabelTextInput
@@ -62,6 +73,18 @@ class SquareOffsetView extends Component {
           keyboardType= 'numeric'
           style={styles.floatLabelTextInput}
           />
+          <Overlay isVisible={this.props.isVisible}>
+            <View style={{flex: 1}>
+              <Image resizeMode='cover'
+                source={require('../../images/diagram2-1.png')} style={{flex: 1}}
+              />
+              <TouchableHighlight
+                style={styles.overlayCancel}>
+                <Icon name='close'
+                  style={styles.cancelIcon} size={28} />
+              </TouchableHighlight>
+            </View>
+          </Overlay>
           <View style={styles.buttonView}>
           <Button iconLeft primary
               accessible={true}
@@ -77,7 +100,7 @@ class SquareOffsetView extends Component {
               accessibilityLabel={'Reset form'}
               onPress={this.reset}
               style={{marginLeft: 4}}>
-              <Icon name='trash'/>          
+              <Icon name='trash'/>        
           </Button>
           </View>
         </View>
@@ -117,6 +140,15 @@ const styles = StyleSheet.create({
   },
   infoText: {
     paddingLeft: 5
+  },
+  overlayCancel: {
+    padding: 20,
+    position: 'absolute',
+    right: 10,
+    top: 0
+  },
+  cancelIcon: {
+    color: 'white'
   }
 });
 export default SquareOffsetView;

@@ -9,7 +9,8 @@ export default connect(
     set: state.getIn(['squareOffset', 'set']),
     travel: state.getIn(['squareOffset', 'travel']),
     run: state.getIn(['squareOffset', 'run']),
-    loading: state.getIn(['squareOffset', 'loading'])
+    loading: state.getIn(['squareOffset', 'loading']),
+    isVisible: state.getIn(['squareOffset', 'isVisible'])
   }),
    dispatch => {
      return {
