@@ -6,7 +6,7 @@ import {Button,Badge,Icon} from 'native-base';
 
 class SquareOffsetView extends Component {
   static propTypes = {
-    set: PropTypes.number,
+    set: PropTypes.number, // TODO: add conditional input validation based on props values
     travel: PropTypes.number,
     run: PropTypes.number,
     loading: PropTypes.bool.isRequired,
@@ -15,22 +15,23 @@ class SquareOffsetView extends Component {
       increment: PropTypes.func.isRequired,
       calculate: PropTypes.func.isRequired,
       reset: PropTypes.func.isRequired,
-      setVisibility: PropTypes.func.isRequired
+      toggleVisibility: PropTypes.func.isRequired
     }).isRequired,
     navigationStateActions: PropTypes.shape({
       pushRoute: PropTypes.func.isRequired
     }).isRequired
   };
 
+  // TODO: debug all actions as props values zero
   increment = () => {
     this.props.squareOffsetStateActions.increment();
   };
 
-  setVisibility = () => {
-    this.props.squareOffsetStateActions.setVisibility();
+  toggleVisibility = () => {
+    this.props.squareOffsetStateActions.toggleVisibility();
   };
 
-  // TODO: Debug action - reducer setup for this action
+  // TODO: Debug action - reducer setup
   calculate = () => {
 
     console.log('props: ' + this.props.set);
@@ -46,15 +47,16 @@ class SquareOffsetView extends Component {
   render() {
     return (
         <View style={styles.container}>
-         <TouchableOpacity style={styles.image} onPress={this.calculate}>
-         <Image
-            style={styles.image}
-            source={require('../../images/diagram2-1.png')}
-          />
+         <TouchableOpacity style={styles.image} onPress={this.toggleVisibility}>
+          <Image
+              style={styles.image}
+              source={require('../../images/diagram2-1.png')}
+            />
           </TouchableOpacity >
           <Badge primary style={{marginBottom: 5}}>
             <Text style={{fontSize: 15, color: '#fff', lineHeight: 21}}>Input 2 values</Text>
           </Badge>
+          
           <FloatLabelTextInput
           value={this.props.set}
           placeholder={'Set'}
@@ -74,16 +76,14 @@ class SquareOffsetView extends Component {
           style={styles.floatLabelTextInput}
           />
           <Overlay isVisible={this.props.isVisible}>
-            <View style={{flex: 1}>
               <Image resizeMode='cover'
-                source={require('../../images/diagram2-1.png')} style={{flex: 1}}
+                source={require('../../images/diagram2-1.png')} style={styles.largeImage}
               />
               <TouchableHighlight
-                style={styles.overlayCancel}>
+                style={styles.overlayCancel} onPress={this.toggleVisibility}>
                 <Icon name='close'
                   style={styles.cancelIcon} size={28} />
               </TouchableHighlight>
-            </View>
           </Overlay>
           <View style={styles.buttonView}>
           <Button iconLeft primary
@@ -128,6 +128,12 @@ const styles = StyleSheet.create({
     maxWidth: ScreenWidth,
     borderColor: '#888',
     marginBottom: 5
+  },
+  largeImage: {
+    maxWidth: ScreenWidth,
+    borderColor: '#888',
+    marginBottom: 5,
+    flex: 4
   },
   floatLabelTextInput: {
     alignSelf: 'stretch'
