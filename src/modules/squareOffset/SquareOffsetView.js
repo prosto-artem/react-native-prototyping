@@ -5,6 +5,7 @@ import FloatLabelTextInput from 'react-native-floating-label-text-input';
 import {Button,Badge,Icon} from 'native-base';
 
 class SquareOffsetView extends Component {
+
   static propTypes = {
     set: PropTypes.number, // TODO: add conditional input validation based on props values
     travel: PropTypes.number,
@@ -45,6 +46,11 @@ class SquareOffsetView extends Component {
   };
 
   render() {
+
+    const {set, run, travel} = this.props;
+    var setString = set.toString();
+    var runString = run.toString();
+    var travelString = travel.toString();
     return (
         <View style={styles.container}>
          <TouchableOpacity style={styles.image} onPress={this.toggleVisibility}>
@@ -58,20 +64,20 @@ class SquareOffsetView extends Component {
           </Badge>
           
           <FloatLabelTextInput
-          value={this.props.set}
+          value={setString}
           placeholder={'Set'}
           keyboardType= 'numeric'
           style={styles.floatLabelTextInput}
           />
           <FloatLabelTextInput
-          value={this.props.travel}
+          value={travelString}
           placeholder={'Travel'}
           keyboardType= 'numeric'         
           style={styles.floatLabelTextInput}
           />
           <FloatLabelTextInput
           placeholder={'Run'}
-          value={this.props.run}
+          value={runString}
           keyboardType= 'numeric'
           style={styles.floatLabelTextInput}
           />
@@ -81,8 +87,7 @@ class SquareOffsetView extends Component {
               />
               <TouchableHighlight
                 style={styles.overlayCancel} onPress={this.toggleVisibility}>
-                <Icon name='close'
-                  style={styles.cancelIcon} size={28} />
+               
               </TouchableHighlight>
           </Overlay>
           <View style={styles.buttonView}>

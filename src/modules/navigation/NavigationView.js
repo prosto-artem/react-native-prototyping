@@ -76,7 +76,7 @@ class NavigationView extends Component {
           navigationState={scenes}
           renderHeader={this.renderHeader}
           renderScene={this.renderScene}
-          />
+        />
         <TabBar
           height={TAB_BAR_HEIGHT}
           tabs={tabs}
