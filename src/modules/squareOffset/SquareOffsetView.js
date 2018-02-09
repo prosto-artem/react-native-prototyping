@@ -34,10 +34,8 @@ class SquareOffsetView extends Component {
 
   // TODO: Debug action - reducer setup
   calculate = () => {
-
-    console.log('props: ' + this.props.set);
-    // this.props.squareOffsetStateActions.calculate(this.props.set,
-    //   this.props.travel, this.props.run);
+    this.props.squareOffsetStateActions.calculate(this.props.set,
+    this.props.travel, this.props.run);
   };
 
   // TODO: Debug action - reducer setup for this action

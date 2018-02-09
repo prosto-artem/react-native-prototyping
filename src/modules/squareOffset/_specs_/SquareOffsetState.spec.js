@@ -26,5 +26,13 @@ describe('SquareOffsetState', () => {
     });
   });
 
+
+  //TODO: Add a test spec for each reducer and action to prove that
+  // they function as expected and updated state -
+  //toggleVisibility
+  //reset
+  //calculate
+  //increment
+
   
 });

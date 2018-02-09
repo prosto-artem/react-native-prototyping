@@ -1,7 +1,6 @@
 import {Map} from 'immutable';
 import {calculateSetTravelRun} from '../../services/offsetCalculateService';
 
-// Initial state
 
 
 // Actions
@@ -30,6 +29,7 @@ export function toggleVisibility() {
   return {type: TOGGLE_VISIBILITY};
 }
 
+// Initial state
 const initialState = Map({
   set: 0,
   travel: 0,
