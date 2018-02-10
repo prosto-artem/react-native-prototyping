@@ -6,6 +6,8 @@ import {Button,Badge,Icon} from 'native-base';
 
 class SquareOffsetView extends Component {
 
+ 
+
   static propTypes = {
     set: PropTypes.number, // TODO: add conditional input validation based on props values
     travel: PropTypes.number,
@@ -34,8 +36,18 @@ class SquareOffsetView extends Component {
 
   // TODO: Debug action - reducer setup
   calculate = () => {
-    this.props.squareOffsetStateActions.calculate(this.props.set,
-    this.props.travel, this.props.run);
+    if(parseInt(this.state.setValue)!==NaN && parseInt(this.state.travelValue)!==NaN && parseInt(this.state.runValue)!==NaN) {
+       this.props.squareOffsetStateActions.calculate(parseInt(this.state.setValue), parseInt(this.state.travelValue), parseInt(this.state.runValue));   
+       
+    } else {
+      alert("Please input Numbers!");
+    }
+    // this.setState({
+    //   setValue: this.props.set,
+    //   travelValue: this.props.travel,
+    //   runValue: this.props.run,
+    // })
+   
   };
 
   // TODO: Debug action - reducer setup for this action
@@ -43,12 +55,20 @@ class SquareOffsetView extends Component {
     this.props.squareOffsetStateActions.reset();
   };
 
+  onChangeSetValue = (text) => {
+    this.setState({setValue: text});
+  }
+
+  onChangeTravelValue = (text) => {
+    this.setState({travelValue: text});
+  }
+
+  onChangeRunValue = (text) => {
+    this.setState({runValue: text});
+  }
+
   render() {
 
-    const {set, run, travel} = this.props;
-    var setString = set.toString();
-    var runString = run.toString();
-    var travelString = travel.toString();
     return (
         <View style={styles.container}>
          <TouchableOpacity style={styles.image} onPress={this.toggleVisibility}>
@@ -57,36 +77,41 @@ class SquareOffsetView extends Component {
               source={require('../../images/diagram2-1.png')}
             />
           </TouchableOpacity >
-          <Badge primary style={{marginBottom: 5}}>
-            <Text style={{fontSize: 15, color: '#fff', lineHeight: 21}}>Input 2 values</Text>
-          </Badge>
+          <TouchableOpacity onPress={this.increment}>
+            <Badge primary style={{marginBottom: 5}}>
+              <Text style={{fontSize: 15, color: '#fff', lineHeight: 21}}>Input 2 values</Text>
+            </Badge>
+          </TouchableOpacity>
           
           <FloatLabelTextInput
-          value={setString}
           placeholder={'Set'}
+
           keyboardType= 'numeric'
           style={styles.floatLabelTextInput}
+          onChangeTextValue={this.onChangeSetValue}
           />
           <FloatLabelTextInput
-          value={travelString}
           placeholder={'Travel'}
+
           keyboardType= 'numeric'         
           style={styles.floatLabelTextInput}
+          onChangeTextValue={this.onChangeTravelValue}
           />
           <FloatLabelTextInput
           placeholder={'Run'}
-          value={runString}
+
           keyboardType= 'numeric'
           style={styles.floatLabelTextInput}
+          onChangeTextValue={this.onChangeRunValue}
           />
           <Overlay isVisible={this.props.isVisible}>
-              <Image resizeMode='cover'
-                source={require('../../images/diagram2-1.png')} style={styles.largeImage}
-              />
-              <TouchableHighlight
-                style={styles.overlayCancel} onPress={this.toggleVisibility}>
-               
-              </TouchableHighlight>
+                <Image resizeMode='cover'
+                  source={require('../../images/diagram2-1.png')} style={styles.largeImage}
+                />
+                <TouchableHighlight
+                  style={styles.overlayCancel} onPress={this.toggleVisibility}>
+                  <Text style={{color: 'white'}}>Cancel Overlay</Text>
+                </TouchableHighlight>
           </Overlay>
           <View style={styles.buttonView}>
           <Button iconLeft primary
