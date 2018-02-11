@@ -6,7 +6,14 @@ import {Button,Badge,Icon} from 'native-base';
 
 class SquareOffsetView extends Component {
 
- 
+ constructor(props) {
+   super(props);
+   this.state = {
+      setflag: false,
+      travelflag: false,
+      runflag: false
+   }
+ }
 
   static propTypes = {
     set: PropTypes.number, // TODO: add conditional input validation based on props values
@@ -27,7 +34,9 @@ class SquareOffsetView extends Component {
 
   // TODO: debug all actions as props values zero
   increment = () => {
+    this.setState({setflag:true, travelflag: true, runflag: true})
     this.props.squareOffsetStateActions.increment();
+    
   };
 
   toggleVisibility = () => {
@@ -36,17 +45,15 @@ class SquareOffsetView extends Component {
 
   // TODO: Debug action - reducer setup
   calculate = () => {
+
+    this.setState({setflag:true, travelflag: true, runflag: true})
+
     if(parseInt(this.state.setValue)!==NaN && parseInt(this.state.travelValue)!==NaN && parseInt(this.state.runValue)!==NaN) {
        this.props.squareOffsetStateActions.calculate(parseInt(this.state.setValue), parseInt(this.state.travelValue), parseInt(this.state.runValue));   
-       
+ 
     } else {
       alert("Please input Numbers!");
     }
-    // this.setState({
-    //   setValue: this.props.set,
-    //   travelValue: this.props.travel,
-    //   runValue: this.props.run,
-    // })
    
   };
 
@@ -56,14 +63,17 @@ class SquareOffsetView extends Component {
   };
 
   onChangeSetValue = (text) => {
+    this.setState({setflag: false})
     this.setState({setValue: text});
   }
 
   onChangeTravelValue = (text) => {
+    this.setState({travelflag: false})
     this.setState({travelValue: text});
   }
 
   onChangeRunValue = (text) => {
+    this.setState({runflag: false})
     this.setState({runValue: text});
   }
 
@@ -85,21 +95,21 @@ class SquareOffsetView extends Component {
           
           <FloatLabelTextInput
           placeholder={'Set'}
-
+          value={this.state.setflag? this.props.set.toString():this.state.setValue}
           keyboardType= 'numeric'
           style={styles.floatLabelTextInput}
           onChangeTextValue={this.onChangeSetValue}
           />
           <FloatLabelTextInput
           placeholder={'Travel'}
-
+          value={this.state.travelflag? this.props.travel.toString():this.state.travelValue}
           keyboardType= 'numeric'         
           style={styles.floatLabelTextInput}
           onChangeTextValue={this.onChangeTravelValue}
           />
           <FloatLabelTextInput
           placeholder={'Run'}
-
+          value={this.state.runflag? this.props.run.toString():this.state.runValue}
           keyboardType= 'numeric'
           style={styles.floatLabelTextInput}
           onChangeTextValue={this.onChangeRunValue}
