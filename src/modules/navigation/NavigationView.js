@@ -13,7 +13,7 @@ import AppRouter from '../AppRouter';
 import TabBar from '../../components/TabBar';
 
 // Customize bottom tab bar height here if desired
-const TAB_BAR_HEIGHT = 70;
+const TAB_BAR_HEIGHT = 60;
 
 class NavigationView extends Component {
   static displayName = 'NavigationView';
@@ -76,7 +76,7 @@ class NavigationView extends Component {
           navigationState={scenes}
           renderHeader={this.renderHeader}
           renderScene={this.renderScene}
-          />
+        />
         <TabBar
           height={TAB_BAR_HEIGHT}
           tabs={tabs}

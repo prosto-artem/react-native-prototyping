@@ -1,15 +1,6 @@
 import {Map} from 'immutable';
 import {calculateSetTravelRun} from '../../services/offsetCalculateService';
 
-// Initial state
-const initialState = Map({
-  set: 0,
-  travel: 0,
-  run: 0,
-  loading: false,
-  isVisible: false
-});
-
 // Actions
 const INCREMENT = 'SquareOffsetState/INCREMENT';
 const CALCULATE = 'SquareOffsetState/CALCULATE';
@@ -36,6 +27,16 @@ export function toggleVisibility() {
   return {type: TOGGLE_VISIBILITY};
 }
 
+// Initial state
+const initialState = Map({
+  set: 0,
+  travel: 0,
+  run: 0,
+  loading: false,
+  isVisible: false,
+  isCalcEnabled: true
+});
+
 // Reducer
 export default function SquareOffsetStateReducer(state = initialState, action = {}) {
   switch (action.type) {
@@ -43,22 +44,19 @@ export default function SquareOffsetStateReducer(state = initialState, action = 
       return initialState;
 
     case TOGGLE_VISIBILITY:
-      return Object.assign({}, state, {
-        isVisible: !state.isVisible
-      });
+      return state.update('isVisible', isVisible => !isVisible);
 
     case INCREMENT:
       return state
-      .set('set', set => set + 1)
-      .set('travel', travel => travel + 1)
-      .set('run', run => run + 1);
+      .update('set', set => set + 1)
+      .update('travel', travel => travel + 1)
+      .update('run', run => run + 1);
 
     case CALCULATE:
-      return Object.assign({}, state, {
-        set: action.payload.set,
-        travel: action.payload.travel,
-        run: action.payload.run
-      });
+      return state
+          .update('set', set => action.payload.set)
+          .update('travel', travel => action.payload.travel)
+          .update('run', run => action.payload.run);
 
     default:
       return state;

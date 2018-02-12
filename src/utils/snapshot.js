@@ -40,6 +40,7 @@ async function persist(state) {
 async function rehydrate() {
   try {
     const state = await AsyncStorage.getItem(STATE_STORAGE_KEY);
+    console.log("AsyncStorage", state);
     return state
       ? JSON.parse(state)
       : null;

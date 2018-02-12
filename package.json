@@ -28,7 +28,10 @@
     "version": "support/version-ios.sh"
   },
   "jest": {
-    "preset": "react-native"
+    "preset": "react-native",
+    "transformIgnorePatterns": [
+      "node_modules/?!(react-native|native-base)"
+    ]
   },
   "dependencies": {
     "bluebird": "^3.3.5",
