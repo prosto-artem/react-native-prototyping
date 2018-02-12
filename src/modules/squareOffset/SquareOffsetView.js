@@ -1,26 +1,28 @@
 import React, {Component, PropTypes} from 'react';
-import {View,Dimensions, StyleSheet, Image, Text, TouchableOpacity,TouchableHighlight} from 'react-native';
+import {View,Dimensions, StyleSheet, Image, Text, TouchableOpacity} from 'react-native';
 import Overlay from 'react-native-overlay';
 import FloatLabelTextInput from 'react-native-floating-label-text-input';
 import {Button,Badge,Icon} from 'native-base';
 
 class SquareOffsetView extends Component {
 
- constructor(props) {
-   super(props);
-   this.state = {
-      setflag: false,
-      travelflag: false,
-      runflag: false
-   }
- }
+    constructor(props) {
+      super(props);
+      this.state={
+        setflag: false,
+        travelflag: false,
+        runflag: false
+      }
+    }
+
 
   static propTypes = {
-    set: PropTypes.number, // TODO: add conditional input validation based on props values
+    set: PropTypes.number,
     travel: PropTypes.number,
     run: PropTypes.number,
     loading: PropTypes.bool.isRequired,
     isVisible: PropTypes.bool.isRequired,
+    isCalcEnabled: PropTypes.bool.isRequired,
     squareOffsetStateActions: PropTypes.shape({
       increment: PropTypes.func.isRequired,
       calculate: PropTypes.func.isRequired,
@@ -34,7 +36,6 @@ class SquareOffsetView extends Component {
 
   // TODO: debug all actions as props values zero
   increment = () => {
-    this.setState({setflag:true, travelflag: true, runflag: true})
     this.props.squareOffsetStateActions.increment();
     
   };
@@ -43,23 +44,45 @@ class SquareOffsetView extends Component {
     this.props.squareOffsetStateActions.toggleVisibility();
   };
 
+  // atLeastTwoValues = () => {
+
+  //   if(this.state.setValue
+  //     ? (this.state.travelValue || this.state.runValue)
+  //     : (this.state.travelValue && this.state.runValue)){
+  //       this.setState({isCalcEnabled: true});
+  //   }else
+  //       this.setState({isCalcEnabled: true});
+  //   }
+
+  // }
+
   // TODO: Debug action - reducer setup
+  //Values not updating in view inputs when action dispatched
+  //but changed in state
   calculate = () => {
 
-    this.setState({setflag:true, travelflag: true, runflag: true})
+    this.setState({setflag: true, travelflag: true, runflag: true});
+    //if at least two values, then allow calculate
+    if (this.state.setValue
+       ? (this.state.travelValue || this.state.runValue)
+       : (this.state.travelValue && this.state.runValue)) {
 
-    if(parseInt(this.state.setValue)!==NaN && parseInt(this.state.travelValue)!==NaN && parseInt(this.state.runValue)!==NaN) {
-       this.props.squareOffsetStateActions.calculate(parseInt(this.state.setValue), parseInt(this.state.travelValue), parseInt(this.state.runValue));   
- 
+      if (parseInt(this.state.setValue) !== NaN && parseInt(this.state.travelValue) !== NaN && parseInt(this.state.runValue) !== NaN) {
+          this.props.squareOffsetStateActions.calculate(parseInt(this.state.setValue), parseInt(this.state.travelValue), parseInt(this.state.runValue));
+
+        }
+
     } else {
-      alert("Please input Numbers!");
+      console.log('invalid input for calculation, at least two numbers required');
     }
-   
   };
 
   // TODO: Debug action - reducer setup for this action
   reset = () => {
+    
     this.props.squareOffsetStateActions.reset();
+    this.setState({setflag: false, travelflag: false, runflag: false});
+    this.setState({setValue: '', travelValue: '', runValue: ''})
   };
 
   onChangeSetValue = (text) => {
@@ -79,6 +102,7 @@ class SquareOffsetView extends Component {
 
   render() {
 
+    console.log(this.props.run);
     return (
         <View style={styles.container}>
          <TouchableOpacity style={styles.image} onPress={this.toggleVisibility}>
@@ -87,30 +111,29 @@ class SquareOffsetView extends Component {
               source={require('../../images/diagram2-1.png')}
             />
           </TouchableOpacity >
-          <TouchableOpacity onPress={this.increment}>
-            <Badge primary style={{marginBottom: 5}}>
-              <Text style={{fontSize: 15, color: '#fff', lineHeight: 21}}>Input 2 values</Text>
-            </Badge>
-          </TouchableOpacity>
           
+            <Badge primary style={{marginBottom: 5}}>
+              <Text style={{fontSize: 15, color: '#fff', lineHeight: 21}}>Input 2 values to calculate offset</Text>
+            </Badge>
+
           <FloatLabelTextInput
           placeholder={'Set'}
-          value={this.state.setflag? this.props.set.toString():this.state.setValue}
           keyboardType= 'numeric'
+          value={this.state.setflag? this.props.set.toString(): this.state.setValue}
           style={styles.floatLabelTextInput}
           onChangeTextValue={this.onChangeSetValue}
           />
           <FloatLabelTextInput
           placeholder={'Travel'}
-          value={this.state.travelflag? this.props.travel.toString():this.state.travelValue}
-          keyboardType= 'numeric'         
+          keyboardType= 'numeric'
+          value={this.state.travelflag? this.props.travel.toString(): this.state.travelValue}
           style={styles.floatLabelTextInput}
           onChangeTextValue={this.onChangeTravelValue}
           />
           <FloatLabelTextInput
           placeholder={'Run'}
-          value={this.state.runflag? this.props.run.toString():this.state.runValue}
           keyboardType= 'numeric'
+          value={this.state.runflag? this.props.run.toString(): this.state.runValue}
           style={styles.floatLabelTextInput}
           onChangeTextValue={this.onChangeRunValue}
           />
@@ -118,29 +141,41 @@ class SquareOffsetView extends Component {
                 <Image resizeMode='cover'
                   source={require('../../images/diagram2-1.png')} style={styles.largeImage}
                 />
-                <TouchableHighlight
-                  style={styles.overlayCancel} onPress={this.toggleVisibility}>
-                  <Text style={{color: 'white'}}>Cancel Overlay</Text>
-                </TouchableHighlight>
+                <Button large warning
+                  accessible={true}
+                  accessibilityLabel={'Minimize diagram'}
+                  onPress={this.toggleVisibility}
+                  style={{padding: 20,
+                    position: 'absolute',
+                    right: 10,
+                    top: 5}}>
+                  <Icon name='close' style={{color: '#fff'}}/>
+                  <Text style={styles.buttonTextStlye}>
+                  Close
+                </Text>
+                </Button>
           </Overlay>
-          <View style={styles.buttonView}>
-          <Button iconLeft primary
-              accessible={true}
-              accessibilityLabel={'Calculate result'}
-              onPress={this.calculate} >
-              <Icon name='calculator' />
-              <Text>
-              Calculate
-            </Text>
-          </Button>
-          <Button small warning
-              accessible={true}
-              accessibilityLabel={'Reset form'}
-              onPress={this.reset}
-              style={{marginLeft: 4}}>
-              <Icon name='trash'/>        
-          </Button>
-          </View>
+          { !this.props.isVisible &&
+            <View style={styles.buttonView} isVisible={!this.props.isVisible}>
+              <Button large iconLeft primary
+                  accessible={true}
+                  //disabled={this.props.isCalcEnabled}
+                  accessibilityLabel={'Calculate result'}
+                  onPress={this.calculate} >
+                  <Icon name='calculator' style={{color: 'white'}} />
+                  <Text style={styles.buttonTextStlye}>
+                  Calculate
+                </Text>
+              </Button>
+              <Button medium warning
+                  accessible={true}
+                  accessibilityLabel={'Reset form'}
+                  onPress={this.reset}
+                  style={{marginLeft: 4, color: 'white'}}>
+                  <Icon name='trash' style={{color: 'white'}}/>
+              </Button>
+            </View>
+          }
         </View>
     );
   }
@@ -154,6 +189,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#ecf0f1',
     padding: 5,
     margin: 5
+  },
+  buttonTextStlye:
+  {
+    color: 'white'
   },
   linkButton: {
     textAlign: 'center',
@@ -180,16 +219,11 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'center',
-    marginTop: 8
+    marginTop: 8,
+    marginBottom: 4
   },
   infoText: {
     paddingLeft: 5
-  },
-  overlayCancel: {
-    padding: 20,
-    position: 'absolute',
-    right: 10,
-    top: 0
   },
   cancelIcon: {
     color: 'white'

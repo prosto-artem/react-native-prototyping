@@ -1,8 +1,6 @@
 import {Map} from 'immutable';
 import {calculateSetTravelRun} from '../../services/offsetCalculateService';
 
-
-
 // Actions
 const INCREMENT = 'SquareOffsetState/INCREMENT';
 const CALCULATE = 'SquareOffsetState/CALCULATE';
@@ -36,6 +34,7 @@ const initialState = Map({
   run: 0,
   loading: false,
   isVisible: false,
+  isCalcEnabled: true
 });
 
 // Reducer
@@ -45,7 +44,7 @@ export default function SquareOffsetStateReducer(state = initialState, action = 
       return initialState;
 
     case TOGGLE_VISIBILITY:
-      return state.update('isVisible', isVisible=>!isVisible);
+      return state.update('isVisible', isVisible => !isVisible);
 
     case INCREMENT:
       return state
@@ -55,9 +54,9 @@ export default function SquareOffsetStateReducer(state = initialState, action = 
 
     case CALCULATE:
       return state
-          .update('set', set=> action.payload.set)
-          .update('travel', travel=>action.payload.travel)
-          .update('run', run=>action.payload.run)
+          .update('set', set => action.payload.set)
+          .update('travel', travel => action.payload.travel)
+          .update('run', run => action.payload.run);
 
     default:
       return state;

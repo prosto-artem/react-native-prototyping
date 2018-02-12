@@ -68,16 +68,19 @@ describe('SquareOffsetState', () => {
 
   describe('reset', () => {
     it('should reset the set state to initial value', () => {
+      const [modifiedState] = dispatch(initialState, SquareOffsetStateActions.increment());
       const [resetState] = dispatch(modifiedState, SquareOffsetStateActions.reset());
       expect(resetState.get('set')).toBe(initialState.get('set'));
     });
 
     it('should reset the travel state to initial value', () => {
+      const [modifiedState] = dispatch(initialState, SquareOffsetStateActions.increment());
       const [resetState] = dispatch(modifiedState, SquareOffsetStateActions.reset());
       expect(resetState.get('travel')).toBe(initialState.get('travel'));
     });
 
     it('should reset the run state to initial value', () => {
+      const [modifiedState] = dispatch(initialState, SquareOffsetStateActions.increment());
       const [resetState] = dispatch(modifiedState, SquareOffsetStateActions.reset());
       expect(resetState.get('run')).toBe(initialState.get('run'));
     });
