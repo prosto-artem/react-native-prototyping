@@ -5,7 +5,6 @@ import {
 } from 'react-native';
 import {Button,Icon} from 'native-base';
 
-
 class TabBarButton extends Component {
   static displayName = 'TabBarButton';
 
@@ -16,17 +15,28 @@ class TabBarButton extends Component {
   };
 
   render() {
-    return (
+    return this.props.isSelected ? (
       <Button light large
         onPress={this.props.action}
         style={{flex: 1,
           justifyContent: 'space-around',
-          alignItems: 'center'
+          alignItems: 'center',
+          backgroundColor: '#BCBDC1'
         }}
         >
-        <Icon name='close'/><Text>{this.props.text}</Text>
+        <Icon style={{color: '#fff'}} name='close'/><Text style={{color: '#fff'}}>{this.props.text}</Text>
       </Button>
-    );
+    ) : (<Button light large
+    onPress={this.props.action}
+    style={{flex: 1,
+      justifyContent: 'space-around',
+      alignItems: 'center',
+      backgroundColor: '#2A3390'
+
+    }}
+    >
+    <Icon style={{color: '#fff'}} name='close'/><Text style={{color: '#fff'}}>{this.props.text}</Text>
+  </Button>);
   }
 }
 
@@ -34,10 +44,9 @@ const styles = StyleSheet.create({
   button: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center'
-  },
-  selected: {
+    alignItems: 'center',
     backgroundColor: 'blue'
+
   }
 });
 

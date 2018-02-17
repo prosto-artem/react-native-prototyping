@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
   },
   sceneContainer: {
     flex: 1,
-    marginBottom: TAB_BAR_HEIGHT
+    marginBottom: TAB_BAR_HEIGHT //todo: diable this style when keyboard active
   }
 });
 
