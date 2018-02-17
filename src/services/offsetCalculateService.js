@@ -1,5 +1,11 @@
 export function calculateSetTravelRun(set,travel,run) {
 
+  Number.prototype.toFixedDown = function(digits) {
+    let re = new RegExp('(\\d+\\.\\d{' + digits + '})(\\d)');
+    let m = this.toString().match(re);
+    return m ? parseFloat(m[1]) : this.valueOf();
+  };
+
   let setTemp;
   let travelTemp;
   let runTemp;
@@ -12,19 +18,19 @@ export function calculateSetTravelRun(set,travel,run) {
     {
       runTemp = Math.pow(setTemp, 2) + Math.pow(travelTemp, 2);
       runTemp = Math.sqrt(runTemp);
-      return {set: setTemp,travel: travelTemp,run: runTemp};
+      return {set: setTemp.toFixedDown(2),travel: travelTemp.toFixedDown(2),run: runTemp.toFixedDown(2)};
     }
     else if (setTemp && runTemp)
     {
       travelTemp = Math.pow(setTemp, 2) + Math.pow(runTemp, 2);
       travelTemp = Math.sqrt(travelTemp);
-      return {set: setTemp,travel: travelTemp,run: runTemp};
+      return {set: setTemp.toFixedDown(2),travel: travelTemp.toFixedDown(2),run: runTemp.toFixedDown(2)};
     }
     else if (travelTemp && runTemp)
     {
       setTemp = Math.pow(travelTemp, 2) + Math.pow(runTemp, 2);
       setTemp = Math.sqrt(setTemp);
-      return {set: setTemp,travel: travelTemp,run: runTemp};
+      return {set: setTemp.toFixedDown(2),travel: travelTemp.toFixedDown(2),run: runTemp.toFixedDown(2)};
     }
   }
   return {};
