@@ -1,10 +1,9 @@
 import React, {PropTypes, Component} from 'react';
 import {
   Text,
-  TouchableOpacity,
   StyleSheet
 } from 'react-native';
-import {Button,Badge,Icon} from 'native-base';
+import {Button,Icon} from 'native-base';
 
 
 class TabBarButton extends Component {
@@ -21,11 +20,11 @@ class TabBarButton extends Component {
       <Button light large
         onPress={this.props.action}
         style={{flex: 1,
-          justifyContent: 'center',
+          justifyContent: 'space-around',
           alignItems: 'center'
-          }}
+        }}
         >
-        <Icon name='close' color='#900' /><Text>{this.props.text}</Text>
+        <Icon name='close'/><Text>{this.props.text}</Text>
       </Button>
     );
   }

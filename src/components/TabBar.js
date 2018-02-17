@@ -1,5 +1,6 @@
 import React, {PropTypes, Component} from 'react';
 import TabBarButton from '../components/TabBarButton';
+import HideWithKeyboard from 'react-native-hide-with-keyboard';
 
 import {
   NavigationExperimental,
@@ -21,6 +22,7 @@ class TabBar extends Component {
 
   render() {
     return (
+      <HideWithKeyboard>
       <View style={[styles.navigationBar, {height: this.props.height}]}>
         {this.props.tabs.routes.map((route, index) => (
           <TabBarButton
@@ -31,6 +33,8 @@ class TabBar extends Component {
             />
         ))}
       </View>
+      </HideWithKeyboard>
+
     );
   }
 }
