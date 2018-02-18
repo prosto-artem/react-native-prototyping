@@ -13,12 +13,6 @@ const {PropTypes: NavigationPropTypes} = NavigationExperimental;
 class TabBar extends Component {
   static displayName = 'TabBar';
 
-  const buttonIconMap = {
-    "squareOffset":"square",
-    "simpleOffet":"triangle",
-    "angleOffset":"circle"
-  };
-
   static propTypes = {
     tabs: NavigationPropTypes.navigationState.isRequired,
     height: PropTypes.number.isRequired,
@@ -26,8 +20,21 @@ class TabBar extends Component {
     switchTab: PropTypes.func.isRequired
   };
 
+  
+
   render() {
     return (
+      routes: [
+        {key: 'HomeTab', title: 'HOME'},
+        {key: 'ProfileTab', title: 'PROFILE'},
+        {key: 'OffsetTab', title: 'OFFSET'}
+      ],
+
+      ButtonIconMap = {
+        "squareOffset":"square",
+        "simpleOffet":"triangle",
+        "angleOffset":"circle"
+      }
       <HideWithKeyboard>
       <View style={[styles.navigationBar, {height: this.props.height}]}>
         {this.props.tabs.routes.map((route, index) => (
