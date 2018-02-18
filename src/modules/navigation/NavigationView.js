@@ -11,6 +11,7 @@ const {
 } = NavigationExperimental;
 import AppRouter from '../AppRouter';
 import TabBar from '../../components/TabBar';
+import HideWithKeyboardCustom from '../../components/HideWithKeyboardCustom';
 
 // Customize bottom tab bar height here if desired
 const TAB_BAR_HEIGHT = 60;
@@ -36,6 +37,18 @@ class NavigationView extends Component {
     pushRoute: PropTypes.func.isRequired
   };
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      keyboardUp: false
+    };
+  }
+
+  handleKeyboardUp = (val) => {
+    //console.warn('handleKeyboardUp: ' + val);
+    this.setState({keyboardUp: val});
+  }
+
   // NavigationHeader accepts a prop style
   // NavigationHeader.title accepts a prop textStyle
   renderHeader = (sceneProps) => {
@@ -57,11 +70,17 @@ class NavigationView extends Component {
   renderScene = (sceneProps) => {
     // render scene and apply padding to cover
     // for app bar and navigation bar
-    return (
-      <View style={styles.sceneContainer}>
-        {AppRouter(sceneProps)}
+    return !this.state.keyboardUp ? (
+        <View style={styles.sceneContainer}>
+            {AppRouter(sceneProps)}
+            <HideWithKeyboardCustom onKeyboardDidShow={this.handleKeyboardUp}/>
+        </View>
+    ) : (
+      <View style={styles.sceneContainerWithKeyboard}>
+          {AppRouter(sceneProps)}
+          <HideWithKeyboardCustom onKeyboardDidShow={this.handleKeyboardUp}/>
       </View>
-    );
+  );
   };
 
   render() {
@@ -95,6 +114,10 @@ const styles = StyleSheet.create({
   sceneContainer: {
     flex: 1,
     marginBottom: TAB_BAR_HEIGHT
+  },
+  sceneContainerWithKeyboard: {
+    flex: 1,
+    marginBottom: 0
   }
 });
 

@@ -1,20 +1,22 @@
 import React, {Component, PropTypes} from 'react';
-import {View,Dimensions, StyleSheet, Image, Text, TouchableOpacity} from 'react-native';
+import {TouchableWithoutFeedback,View,Dimensions, StyleSheet, Image, Text, TouchableOpacity} from 'react-native';
 import Overlay from 'react-native-overlay';
 import FloatLabelTextInput from 'react-native-floating-label-text-input';
 import {Button,Badge,Icon} from 'native-base';
+import AwesomeAlert from 'react-native-awesome-alerts';
+import dismissKeyboard from 'react-native-dismiss-keyboard';
 
 class SquareOffsetView extends Component {
 
-    constructor(props) {
-      super(props);
-      this.state={
-        setflag: false,
-        travelflag: false,
-        runflag: false
-      }
-    }
-
+  constructor(props) {
+    super(props);
+    this.state = {
+      setflag: false,
+      travelflag: false,
+      runflag: false,
+      showAlert: false
+    };
+  }
 
   static propTypes = {
     set: PropTypes.number,
@@ -37,66 +39,59 @@ class SquareOffsetView extends Component {
   // TODO: debug all actions as props values zero
   increment = () => {
     this.props.squareOffsetStateActions.increment();
-    
+
   };
 
   toggleVisibility = () => {
     this.props.squareOffsetStateActions.toggleVisibility();
   };
 
-  // atLeastTwoValues = () => {
-
-  //   if(this.state.setValue
-  //     ? (this.state.travelValue || this.state.runValue)
-  //     : (this.state.travelValue && this.state.runValue)){
-  //       this.setState({isCalcEnabled: true});
-  //   }else
-  //       this.setState({isCalcEnabled: true});
-  //   }
-
-  // }
-
   // TODO: Debug action - reducer setup
   //Values not updating in view inputs when action dispatched
   //but changed in state
   calculate = () => {
 
-    this.setState({setflag: true, travelflag: true, runflag: true});
     //if at least two values, then allow calculate
     if (this.state.setValue
-       ? (this.state.travelValue || this.state.runValue)
-       : (this.state.travelValue && this.state.runValue)) {
+       ? (this.state.travelValue !== 0 && this.state.travelValue || this.state.runValue !== 0 && this.state.runValue)
+       : (this.state.travelValue !== 0 && this.state.travelValue && this.state.runValue !== 0 && this.state.runValue)) {
 
-      if (parseInt(this.state.setValue) !== NaN && parseInt(this.state.travelValue) !== NaN && parseInt(this.state.runValue) !== NaN) {
-          this.props.squareOffsetStateActions.calculate(parseInt(this.state.setValue), parseInt(this.state.travelValue), parseInt(this.state.runValue));
+      this.setState({setflag: true, travelflag: true, runflag: true,showAlert: false});
 
-        }
-
+      if (!parseInt(this.state.setValue).isNaN && !parseInt(this.state.travelValue).isNaN && !parseInt(this.state.runValue).isNaN) {
+        this.props.squareOffsetStateActions.calculate(parseInt(this.state.setValue), parseInt(this.state.travelValue), parseInt(this.state.runValue));
+      }
     } else {
-      console.log('invalid input for calculation, at least two numbers required');
+      this.setState({showAlert: true});
     }
   };
 
   // TODO: Debug action - reducer setup for this action
   reset = () => {
-    
+
     this.props.squareOffsetStateActions.reset();
     this.setState({setflag: false, travelflag: false, runflag: false});
-    this.setState({setValue: '', travelValue: '', runValue: ''})
+    this.setState({setValue: '', travelValue: '', runValue: ''});
+  };
+
+  hideAlert = () => {
+    this.setState({
+      showAlert: false
+    });
   };
 
   onChangeSetValue = (text) => {
-    this.setState({setflag: false})
+    this.setState({setflag: false});
     this.setState({setValue: text});
   }
 
   onChangeTravelValue = (text) => {
-    this.setState({travelflag: false})
+    this.setState({travelflag: false});
     this.setState({travelValue: text});
   }
 
   onChangeRunValue = (text) => {
-    this.setState({runflag: false})
+    this.setState({runflag: false});
     this.setState({runValue: text});
   }
 
@@ -104,6 +99,7 @@ class SquareOffsetView extends Component {
 
     console.log(this.props.run);
     return (
+      <TouchableWithoutFeedback onPress={ () => { dismissKeyboard(); } }>
         <View style={styles.container}>
          <TouchableOpacity style={styles.image} onPress={this.toggleVisibility}>
           <Image
@@ -111,29 +107,29 @@ class SquareOffsetView extends Component {
               source={require('../../images/diagram2-1.png')}
             />
           </TouchableOpacity >
-          
+
             <Badge primary style={{marginBottom: 5}}>
-              <Text style={{fontSize: 15, color: '#fff', lineHeight: 21}}>Input 2 values to calculate offset</Text>
+              <Text style={{fontSize: 15, color: '#fff', lineHeight: 21}}>Input 2 values </Text>
             </Badge>
 
           <FloatLabelTextInput
           placeholder={'Set'}
           keyboardType= 'numeric'
-          value={this.state.setflag? this.props.set.toString(): this.state.setValue}
+          value={this.state.setflag ? this.props.set.toString() : this.state.setValue}
           style={styles.floatLabelTextInput}
           onChangeTextValue={this.onChangeSetValue}
           />
           <FloatLabelTextInput
           placeholder={'Travel'}
           keyboardType= 'numeric'
-          value={this.state.travelflag? this.props.travel.toString(): this.state.travelValue}
+          value={this.state.travelflag ? this.props.travel.toString() : this.state.travelValue}
           style={styles.floatLabelTextInput}
           onChangeTextValue={this.onChangeTravelValue}
           />
           <FloatLabelTextInput
           placeholder={'Run'}
           keyboardType= 'numeric'
-          value={this.state.runflag? this.props.run.toString(): this.state.runValue}
+          value={this.state.runflag ? this.props.run.toString() : this.state.runValue}
           style={styles.floatLabelTextInput}
           onChangeTextValue={this.onChangeRunValue}
           />
@@ -155,11 +151,24 @@ class SquareOffsetView extends Component {
                 </Text>
                 </Button>
           </Overlay>
+          <AwesomeAlert
+            show={this.state.showAlert}
+            title='Input Error'
+            message='Input at least 2 values..'
+            closeOnTouchOutside={true}
+            closeOnHardwareBackPress={true}
+            showCancelButton={false}
+            showConfirmButton={true}
+            confirmText='Ok'
+            confirmButtonColor='#DD6B55'
+            onConfirmPressed={() => {
+              this.hideAlert();
+            }}
+          />
           { !this.props.isVisible &&
             <View style={styles.buttonView} isVisible={!this.props.isVisible}>
               <Button large iconLeft primary
                   accessible={true}
-                  //disabled={this.props.isCalcEnabled}
                   accessibilityLabel={'Calculate result'}
                   onPress={this.calculate} >
                   <Icon name='calculator' style={{color: 'white'}} />
@@ -171,12 +180,13 @@ class SquareOffsetView extends Component {
                   accessible={true}
                   accessibilityLabel={'Reset form'}
                   onPress={this.reset}
-                  style={{marginLeft: 4, color: 'white'}}>
+                  style={{marginLeft: 4}}>
                   <Icon name='trash' style={{color: 'white'}}/>
               </Button>
             </View>
           }
         </View>
+     </TouchableWithoutFeedback>
     );
   }
   }
@@ -209,7 +219,7 @@ const styles = StyleSheet.create({
   largeImage: {
     maxWidth: ScreenWidth,
     borderColor: '#888',
-    marginBottom: 5,
+    marginBottom: 10,
     flex: 4
   },
   floatLabelTextInput: {
@@ -219,7 +229,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'center',
-    marginTop: 8,
+    marginTop: 15,
     marginBottom: 4
   },
   infoText: {
