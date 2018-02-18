@@ -19,11 +19,7 @@ build:
   override:
     - yarn install
 
-test:
-  override:
-    - npm test
-    
-    
+       
 
 jobs:
    build:
@@ -43,6 +39,7 @@ jobs:
         - image: circleci/node:8.9.0
       steps:
         - checkout
+        - run: yarn install
         - run: npm test
         - persist_to_workspace:
             root: ~/repo
