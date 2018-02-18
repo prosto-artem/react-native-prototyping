@@ -13,6 +13,12 @@ const {PropTypes: NavigationPropTypes} = NavigationExperimental;
 class TabBar extends Component {
   static displayName = 'TabBar';
 
+  const buttonIconMap = {
+    "squareOffset":"square",
+    "simpleOffet":"triangle",
+    "angleOffset":"circle"
+  };
+
   static propTypes = {
     tabs: NavigationPropTypes.navigationState.isRequired,
     height: PropTypes.number.isRequired,
@@ -28,6 +34,7 @@ class TabBar extends Component {
           <TabBarButton
             key={'tab-bar-button-' + route.key}
             text={route.title}
+            iconName={buttonIconMap[route.title]}
             action={() => this.props.switchTab(route.key)}
             isSelected={index === this.props.currentTabIndex}
             />

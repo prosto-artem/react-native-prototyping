@@ -1,0 +1,79 @@
+# Javascript Node CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-javascript/ for more details
+#
+version: 2
+machine:
+  environment:
+    PATH: "${PATH}:${HOME}/${CIRCLE_PROJECT_REPONAME}/node_modules/.bin"
+
+dependencies:
+  override:
+    - yarn
+  cache_directories:
+    - ~/.cache/yarn
+
+test:
+  override:
+    - yarn test
+    
+build:
+  override:
+    - yarn install
+    
+    
+
+jobs:
+   build:
+    working_directory: ~/repo
+    docker:
+      - image: circleci/node:8
+    steps:
+      - checkout
+      - run: yarn install
+      - persist_to_workspace:
+          root: ~/repo
+          paths:
+            - node_modules  
+    test:
+      working_directory: ~/repo
+      docker:
+        - image: circleci/node:8
+      steps:
+        - checkout
+        - run: yarn test
+        - persist_to_workspace:
+            root: ~/repo
+            paths:
+              - node_modules
+        - store_test_results:
+          path: ~/repo/jest.xml
+          
+    android:
+       working_directory: ~/repo/android
+       docker:
+         - image: circleci/android:api-27-node8-alpha
+       steps:
+         - checkout:
+             path: ~/repo
+         - attach_workspace:
+             at: ~/repo
+         - run: bundle install
+         #- run: bundle exec fastlane test
+         - store_test_results:
+           path: ~/root/android/reports
+
+
+workflows:
+  version: 2
+  node-android:
+    jobs:
+      - build:
+          filters:
+            tags:
+              ignore: /^testing
+      - test           
+      - android:
+          requires:
+            - test
+            - build

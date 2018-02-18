@@ -11,7 +11,8 @@ class TabBarButton extends Component {
   static propTypes = {
     text: PropTypes.string.isRequired,
     action: PropTypes.func.isRequired,
-    isSelected: PropTypes.bool.isRequired
+    isSelected: PropTypes.bool.isRequired,
+    iconName: PropTypes.string.isRequired
   };
 
   render() {
@@ -35,7 +36,7 @@ class TabBarButton extends Component {
 
     }}
     >
-    <Icon style={{color: '#fff'}} name='close'/><Text style={{color: '#fff'}}>{this.props.text}</Text>
+    <Icon style={{color: '#fff'}} name={this.props.iconName}/><Text style={{color: '#fff'}}>{this.props.text}</Text>
   </Button>);
   }
 }

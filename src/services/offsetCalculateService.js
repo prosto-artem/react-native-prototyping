@@ -14,19 +14,19 @@ export function calculateSetTravelRun(set,travel,run) {
   runTemp = run;
   if (setTemp ? (travelTemp || runTemp) : (travelTemp && runTemp))
   {
-    if (setTemp && travelTemp)
+    if (setTemp !== 0 && travelTemp !== 0)
     {
       runTemp = Math.pow(setTemp, 2) + Math.pow(travelTemp, 2);
       runTemp = Math.sqrt(runTemp);
       return {set: setTemp.toFixedDown(2),travel: travelTemp.toFixedDown(2),run: runTemp.toFixedDown(2)};
     }
-    else if (setTemp && runTemp)
+    else if (setTemp !== 0 && runTemp !== 0)
     {
       travelTemp = Math.pow(setTemp, 2) + Math.pow(runTemp, 2);
       travelTemp = Math.sqrt(travelTemp);
       return {set: setTemp.toFixedDown(2),travel: travelTemp.toFixedDown(2),run: runTemp.toFixedDown(2)};
     }
-    else if (travelTemp && runTemp)
+    else if (travelTemp !== 0 && runTemp !== 0)
     {
       setTemp = Math.pow(travelTemp, 2) + Math.pow(runTemp, 2);
       setTemp = Math.sqrt(setTemp);
