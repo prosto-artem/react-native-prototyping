@@ -30,18 +30,18 @@ jobs:
           path: ~/repo/jest.xml
           
     android:
-    working_directory: ~/repo/android
-    docker:
-      - image: circleci/android:api-27-node8-alpha
-    steps:
-      - checkout:
-          path: ~/repo
-      - attach_workspace:
-          at: ~/repo
-      - run: bundle install
-      #- run: bundle exec fastlane test
-      - store_test_results:
-        path: ~/root/android/reports
+       working_directory: ~/repo/android
+       docker:
+         - image: circleci/android:api-27-node8-alpha
+       steps:
+         - checkout:
+             path: ~/repo
+         - attach_workspace:
+             at: ~/repo
+         - run: bundle install
+         #- run: bundle exec fastlane test
+         - store_test_results:
+           path: ~/root/android/reports
 
 
 workflows:
