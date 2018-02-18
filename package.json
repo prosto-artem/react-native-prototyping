@@ -20,6 +20,7 @@
   "private": false,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
+    "android": "react-native run-android",
     "bundle:ios": "node ./node_modules/react-native/local-cli/cli.js bundle --platform ios --entry-file index.ios.js --bundle-output ios/SimpleOffsetPRO/main.jsbundle --dev=false --verbose",
     "test": "jest",
     "test:watch": "jest --watch --verbose",
