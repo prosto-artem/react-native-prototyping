@@ -10,13 +10,18 @@ machine:
 dependencies:
   override:
     - yarn
+    - jest
   cache_directories:
     - ~/.cache/yarn
-
+    - ~/.cache/jest
     
 build:
   override:
     - yarn install
+
+test:
+  override:
+    - npm test
     
     
 
@@ -35,7 +40,7 @@ jobs:
    test:
       working_directory: ~/repo
       docker:
-        - image: circleci/node:8
+        - image: circleci/node:8.9.0
       steps:
         - checkout
         - run: npm test
