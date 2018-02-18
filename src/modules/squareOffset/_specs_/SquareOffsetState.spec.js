@@ -55,10 +55,10 @@ describe('SquareOffsetState', () => {
     });
   });
 
-  describe('toggoleVisibility', () => {
+  describe('toggleVisibility', () => {
     const getIsVisible = state => state.getIn(['squareOffset', 'isVisible']);
 
-    it('should increment the toggle value property by one', () => {
+    it('should toggle the value between true and false', () => {
       const [secondState] = dispatch(initialState, SquareOffsetStateActions.increment());
       expect(getIsVisible(secondState)).toBe(!getIsVisible('isVisible'));
 
@@ -87,7 +87,7 @@ describe('SquareOffsetState', () => {
   });
 
   // Example of how to test side effects returned from reducers
-  describe('calculator', () => {
+  describe('calculate', () => {
 
     const [nextState, effects] = dispatch(initialState, SquareOffsetStateActions.calculate());
 
