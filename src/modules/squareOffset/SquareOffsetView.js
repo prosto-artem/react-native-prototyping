@@ -55,10 +55,10 @@ class SquareOffsetView extends Component {
     if (this.state.setValue
        ? (this.state.travelValue !== 0 && this.state.travelValue || this.state.runValue !== 0 && this.state.runValue)
        : (this.state.travelValue !== 0 && this.state.travelValue && this.state.runValue !== 0 && this.state.runValue)) {
-      
-        this.setState({setflag: true, travelflag: true, runflag: true,showAlert: false});
 
-      if (parseInt(this.state.setValue) !== NaN && parseInt(this.state.travelValue) !== NaN && parseInt(this.state.runValue) !== NaN) {
+      this.setState({setflag: true, travelflag: true, runflag: true,showAlert: false});
+
+      if (!parseInt(this.state.setValue).isNaN && !parseInt(this.state.travelValue).isNaN && !parseInt(this.state.runValue).isNaN) {
         this.props.squareOffsetStateActions.calculate(parseInt(this.state.setValue), parseInt(this.state.travelValue), parseInt(this.state.runValue));
       }
     } else {
@@ -109,7 +109,7 @@ class SquareOffsetView extends Component {
           </TouchableOpacity >
 
             <Badge primary style={{marginBottom: 5}}>
-              <Text style={{fontSize: 15, color: '#fff', lineHeight: 21}}>Input 2 values to calculate offset</Text>
+              <Text style={{fontSize: 15, color: '#fff', lineHeight: 21}}>Input 2 values </Text>
             </Badge>
 
           <FloatLabelTextInput
@@ -169,7 +169,6 @@ class SquareOffsetView extends Component {
             <View style={styles.buttonView} isVisible={!this.props.isVisible}>
               <Button large iconLeft primary
                   accessible={true}
-                  //disabled={this.props.isCalcEnabled}
                   accessibilityLabel={'Calculate result'}
                   onPress={this.calculate} >
                   <Icon name='calculator' style={{color: 'white'}} />
@@ -181,7 +180,7 @@ class SquareOffsetView extends Component {
                   accessible={true}
                   accessibilityLabel={'Reset form'}
                   onPress={this.reset}
-                  style={{marginLeft: 4, color: 'white'}}>
+                  style={{marginLeft: 4}}>
                   <Icon name='trash' style={{color: 'white'}}/>
               </Button>
             </View>
@@ -220,7 +219,7 @@ const styles = StyleSheet.create({
   largeImage: {
     maxWidth: ScreenWidth,
     borderColor: '#888',
-    marginBottom: 5,
+    marginBottom: 10,
     flex: 4
   },
   floatLabelTextInput: {
@@ -230,7 +229,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'center',
-    marginTop: 8,
+    marginTop: 15,
     marginBottom: 4
   },
   infoText: {
