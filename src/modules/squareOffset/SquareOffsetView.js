@@ -39,6 +39,7 @@ class SquareOffsetView extends Component {
     }).isRequired
   };
 
+
   // TODO: debug all actions as props values zero
   increment = () => {
     this.props.squareOffsetStateActions.increment();
@@ -96,6 +97,22 @@ class SquareOffsetView extends Component {
   onChangeRunValue = (text) => {
     this.setState({runflag: false});
     this.setState({runValue: text});
+  }
+  
+  //todo: test this!
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.travel !== this.state.travelValue) {
+      this.onChangeTravelValue(nextProps.travel.toString());
+    }
+    
+     if (nextProps.set !== this.state.setValue) {
+      this.onChangeSetValue(nextProps.set.toString());
+    }
+    
+     if (nextProps.run !== this.state.runValue) {
+      this.onChangeRunValue(nextProps.run.toString());
+    }
+       
   }
 
   render() {
