@@ -20,7 +20,9 @@ export function calculateSetTravelRun(set,travel,run) {
 
     if (setTemp && travelTemp)
     {
-      runTemp = Math.pow(setTemp, 2) + Math.pow(travelTemp, 2);
+      let setSquared = Math.pow(setTemp, 2);
+      let travelSquared = Math.pow(travelTemp, 2);
+      runTemp = travelSquared - setSquared;
       runTemp = Math.sqrt(runTemp);
       return {set: setTemp.toFixedDown(2),travel: travelTemp.toFixedDown(2),run: runTemp.toFixedDown(2)};
     }
@@ -32,8 +34,9 @@ export function calculateSetTravelRun(set,travel,run) {
     }
     else if (travelTemp && runTemp)
     {
-      console.warn("in settemp calc");
-      setTemp = Math.pow(travelTemp, 2) + Math.pow(runTemp, 2);
+      let travelSquared = Math.pow(travelTemp, 2);
+      let runSquared = Math.pow(runTemp, 2);
+      setTemp =  travelSquared - runSquared;
       setTemp = Math.sqrt(setTemp);
       return {set: setTemp.toFixedDown(2),travel: travelTemp.toFixedDown(2),run: runTemp.toFixedDown(2)};
     }
