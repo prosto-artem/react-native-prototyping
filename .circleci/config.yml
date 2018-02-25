@@ -2,7 +2,7 @@
 #
 # Check https://circleci.com/docs/2.0/language-javascript/ for more details
 #
-version: 1
+version: 2
 machine:
   environment:
     PATH: "${PATH}:${HOME}/${CIRCLE_PROJECT_REPONAME}/node_modules/.bin"
@@ -10,18 +10,16 @@ machine:
 dependencies:
   override:
     - yarn
+    - jest
   cache_directories:
     - ~/.cache/yarn
-
-test:
-  override:
-    - yarn test
+    - ~/.cache/jest
     
 build:
   override:
     - yarn install
-    
-    
+
+       
 
 jobs:
    build:
@@ -35,33 +33,31 @@ jobs:
           root: ~/repo
           paths:
             - node_modules  
-    test:
+   test:
       working_directory: ~/repo
       docker:
-        - image: circleci/node:8
+        - image: circleci/node:8.9.0
       steps:
         - checkout
-        - run: yarn test
+        - run: yarn install
+        - run: npm test
         - persist_to_workspace:
             root: ~/repo
             paths:
-              - node_modules
+              - node_modules         
+   android:
+      working_directory: ~/repo/android
+      docker:
+        - image: circleci/android:api-27-node8-alpha
+      steps:
+        - checkout:
+            path: ~/repo
+        - attach_workspace:
+            at: ~/repo
+        - run: bundle install
+        #- run: bundle exec fastlane test
         - store_test_results:
-          path: ~/repo/jest.xml
-          
-    android:
-       working_directory: ~/repo/android
-       docker:
-         - image: circleci/android:api-27-node8-alpha
-       steps:
-         - checkout:
-             path: ~/repo
-         - attach_workspace:
-             at: ~/repo
-         - run: bundle install
-         #- run: bundle exec fastlane test
-         - store_test_results:
-           path: ~/root/android/reports
+          path: ~/root/android/reports
 
 
 workflows:
