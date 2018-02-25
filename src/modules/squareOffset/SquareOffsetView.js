@@ -14,10 +14,10 @@ class SquareOffsetView extends Component {
       setflag: false,
       travelflag: false,
       runflag: false,
-      showAlert: false,
-      travelValue: this.props.travel,
-      setValue: this.props.set,
-      runValue: this.props.run
+      showAlert: false
+      // travelValue: this.props.travel,
+      // setValue: this.props.set,
+      // runValue: this.props.run
     };
   }
 
@@ -62,7 +62,7 @@ class SquareOffsetView extends Component {
       this.setState({setflag: true, travelflag: true, runflag: true,showAlert: false});
 
       if (!parseInt(this.state.setValue).isNaN && !parseInt(this.state.travelValue).isNaN && !parseInt(this.state.runValue).isNaN) {
-        this.props.squareOffsetStateActions.calculate(parseInt(this.state.setValue), parseInt(this.state.travelValue), parseInt(this.state.runValue));
+        this.props.squareOffsetStateActions.calculate(parseFloat(this.state.setValue), parseFloat(this.state.travelValue), parseFloat(this.state.runValue));
       }
     } else {
       this.setState({showAlert: true});
