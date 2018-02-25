@@ -9,11 +9,6 @@ import {
 } from 'react-native';
 
 const {PropTypes: NavigationPropTypes} = NavigationExperimental;
-const buttonIconMap = {
-  'squareOffset': 'donut-small',
-  'simpleOffet': 'donut-small',
-  'angleOffset': 'circle'
-};
 
 class TabBar extends Component {
   static displayName = 'TabBar';
@@ -27,19 +22,19 @@ class TabBar extends Component {
 
   render() {
     return (
+      <HideWithKeyboard>
       <View style={[styles.navigationBar, {height: this.props.height}]}>
-        <HideWithKeyboard>
         {this.props.tabs.routes.map((route, index) => (
           <TabBarButton
             key={'tab-bar-button-' + route.key}
             text={route.title}
-            iconName={buttonIconMap[route.title]}
             action={() => this.props.switchTab(route.key)}
             isSelected={index === this.props.currentTabIndex}
             />
         ))}
-        </HideWithKeyboard>
       </View>
+      </HideWithKeyboard>
+
 
     );
   }

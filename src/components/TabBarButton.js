@@ -21,7 +21,7 @@ class TabBarButton extends Component {
         style={{flex: 1,
           justifyContent: 'space-around',
           alignItems: 'center',
-          backgroundColor: '#BCBDC1'
+          backgroundColor: '#FFA500'
         }}
         >
         <Icon style={{color: '#fff'}} name='md-hammer'/><Text style={{color: '#fff'}}>{this.props.text}</Text>
@@ -39,15 +39,4 @@ class TabBarButton extends Component {
   </Button>);
   }
 }
-
-const styles = StyleSheet.create({
-  button: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'blue'
-
-  }
-});
-
 export default TabBarButton;

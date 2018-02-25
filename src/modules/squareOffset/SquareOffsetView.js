@@ -14,7 +14,10 @@ class SquareOffsetView extends Component {
       setflag: false,
       travelflag: false,
       runflag: false,
-      showAlert: false
+      showAlert: false,
+      travelValue: this.props.travel,
+      setValue: this.props.set,
+      runValue: this.props.run
     };
   }
 
@@ -107,14 +110,11 @@ class SquareOffsetView extends Component {
               source={require('../../images/diagram2-1.png')}
             />
           </TouchableOpacity >
-          <View style={styles.badgeRow}>
+
             <Badge primary style={{marginBottom: 5}}>
-              <Text style={{fontSize: 15, color: '#fff', lineHeight: 21}}>Input 2 values </Text>
+              <Text style={{fontSize: 15, color: '#fff', lineHeight: 21}}>Measurement Units: Centimetre (CM)</Text>
             </Badge>
-            <Badge primary style={{marginBottom: 5}}>
-              <Text style={{fontSize: 15, color: '#fff', lineHeight: 21}}>Measurement: CM</Text>
-            </Badge>
-          </View>
+
           <FloatLabelTextInput
           placeholder={'Set'}
           keyboardType= 'numeric'
@@ -218,10 +218,6 @@ const styles = StyleSheet.create({
     maxWidth: ScreenWidth,
     borderColor: '#888',
     marginBottom: 5
-  },
-  badgeRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between'
   },
   largeImage: {
     maxWidth: ScreenWidth,
