@@ -6,14 +6,10 @@ export function calculateSetTravelRun(set,travel,run) {
     return m ? parseFloat(m[1]) : this.valueOf();
   };
 
-  let setTemp = '';
-  let travelTemp = '';
-  let runTemp = '';
-  setTemp = set;
-  travelTemp = travel;
-  runTemp = run;
+  let setTemp = set;
+  let travelTemp = travel;
+  let runTemp = run;
 
-  console.warn("set: " + setTemp + "travel: " + travel + "run: " + runTemp);
   if (setTemp ? (travelTemp || runTemp) : (travelTemp && runTemp))
   {
     //re-implement this logic against The Pythagorean Theorem, hypotenuse
@@ -36,7 +32,7 @@ export function calculateSetTravelRun(set,travel,run) {
     {
       let travelSquared = Math.pow(travelTemp, 2);
       let runSquared = Math.pow(runTemp, 2);
-      setTemp =  travelSquared - runSquared;
+      setTemp = travelSquared - runSquared;
       setTemp = Math.sqrt(setTemp);
       return {set: setTemp.toFixedDown(2),travel: travelTemp.toFixedDown(2),run: runTemp.toFixedDown(2)};
     }

@@ -13,7 +13,6 @@ export function increment() {
 }
 
 export function calculate(set,travel,run) {
-  console.warn("set ac: " + set + "travel ac: " + travel + "run ac: " + run);
   return {
     type: CALCULATE,
     payload: calculateSetTravelRun(set,travel,run)

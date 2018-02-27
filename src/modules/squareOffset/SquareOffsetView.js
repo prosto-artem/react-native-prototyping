@@ -1,25 +1,15 @@
 import React, {Component, PropTypes} from 'react';
-import {TouchableWithoutFeedback,View,Dimensions, StyleSheet, Image, Text, TouchableOpacity} from 'react-native';
+import {TouchableWithoutFeedback,View,Dimensions,
+  StyleSheet, Image, Text, TouchableOpacity} from 'react-native';
 import Overlay from 'react-native-overlay';
 import FloatLabelTextInput from 'react-native-floating-label-text-input';
 import {Button,Badge,Icon} from 'native-base';
 import AwesomeAlert from 'react-native-awesome-alerts';
 import dismissKeyboard from 'react-native-dismiss-keyboard';
 
-class SquareOffsetView extends Component {
+const ScreenWidth = Dimensions.get('window').width;
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      setflag: false,
-      travelflag: false,
-      runflag: false,
-      showAlert: false
-      // travelValue: this.props.travel,
-      // setValue: this.props.set,
-      // runValue: this.props.run
-    };
-  }
+class SquareOffsetView extends Component {
 
   static propTypes = {
     set: PropTypes.number,
@@ -39,8 +29,28 @@ class SquareOffsetView extends Component {
     }).isRequired
   };
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      setflag: false,
+      travelflag: false,
+      runflag: false,
+      showAlert: false
+    };
+  }
 
-  // TODO: debug all actions as props values zero
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.travel !== this.state.travelValue && nextProps.travel) {
+      this.onChangeTravelValue(nextProps.travel.toString());
+    }
+    if (nextProps.set !== this.state.setValue && nextProps.set) {
+      this.onChangeSetValue(nextProps.set.toString());
+    }
+    if (nextProps.run !== this.state.runValue && nextProps.run) {
+      this.onChangeRunValue(nextProps.run.toString());
+    }
+  }
+
   increment = () => {
     this.props.squareOffsetStateActions.increment();
 
@@ -50,9 +60,6 @@ class SquareOffsetView extends Component {
     this.props.squareOffsetStateActions.toggleVisibility();
   };
 
-  // TODO: Debug action - reducer setup
-  //Values not updating in view inputs when action dispatched
-  //but changed in state
   calculate = () => {
 
     //if at least two values, then allow calculate
@@ -70,7 +77,6 @@ class SquareOffsetView extends Component {
     }
   };
 
-  // TODO: Debug action - reducer setup for this action
   reset = () => {
 
     this.props.squareOffsetStateActions.reset();
@@ -98,40 +104,20 @@ class SquareOffsetView extends Component {
     this.setState({runflag: false});
     this.setState({runValue: text});
   }
-  
-  //todo: test this!
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.travel !== this.state.travelValue) {
-      this.onChangeTravelValue(nextProps.travel.toString());
-    }
-    
-     if (nextProps.set !== this.state.setValue) {
-      this.onChangeSetValue(nextProps.set.toString());
-    }
-    
-     if (nextProps.run !== this.state.runValue) {
-      this.onChangeRunValue(nextProps.run.toString());
-    }
-       
-  }
 
   render() {
 
-    console.log(this.props.run);
     return (
       <TouchableWithoutFeedback onPress={ () => { dismissKeyboard(); } }>
         <View style={styles.container}>
          <TouchableOpacity style={styles.image} onPress={this.toggleVisibility}>
           <Image
               style={styles.image}
-              source={require('../../images/diagram2-1.png')}
-            />
-          </TouchableOpacity >
-
+              source={require('../../images/diagram2-1@2x.png')}/>
+         </TouchableOpacity>
             <Badge primary style={{marginBottom: 5}}>
               <Text style={{fontSize: 15, color: '#fff', lineHeight: 21}}>Measurement Units: Centimetre (CM)</Text>
             </Badge>
-
           <FloatLabelTextInput
           placeholder={'Set'}
           keyboardType= 'numeric'
@@ -210,7 +196,6 @@ class SquareOffsetView extends Component {
     );
   }
   }
-const ScreenWidth = Dimensions.get('window').width;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -232,11 +217,13 @@ const styles = StyleSheet.create({
   },
   image: {
     flex: 2.5,
+    minWidth: ScreenWidth,
     maxWidth: ScreenWidth,
     borderColor: '#888',
     marginBottom: 5
   },
   largeImage: {
+    minWidth: ScreenWidth,
     maxWidth: ScreenWidth,
     borderColor: '#888',
     marginBottom: 10,
