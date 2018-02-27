@@ -33,7 +33,7 @@ jobs:
           root: ~/repo
           paths:
             - node_modules  
-   test:
+    test:
       working_directory: ~/repo
       docker:
         - image: circleci/node:8.9.0
@@ -45,7 +45,7 @@ jobs:
             root: ~/repo
             paths:
               - node_modules         
-   android:
+    android:
       working_directory: ~/repo/android
       docker:
         - image: circleci/android:api-27-node8-alpha
@@ -68,7 +68,9 @@ workflows:
           filters:
             tags:
               ignore: /^testing
-      - test           
+      - test   
+          requires:
+            - test
       - android:
           requires:
             - test
