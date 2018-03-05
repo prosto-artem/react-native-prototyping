@@ -2,25 +2,7 @@
 #
 # Check https://circleci.com/docs/2.0/language-javascript/ for more details
 #
-version: 2
-machine:
-  environment:
-    PATH: "${PATH}:${HOME}/${CIRCLE_PROJECT_REPONAME}/node_modules/.bin"
-
-dependencies:
-  override:
-    - yarn
-    - jest
-  cache_directories:
-    - ~/.cache/yarn
-    - ~/.cache/jest
-    
-build:
-  override:
-    - yarn install
-
-       
-
+version: 2 
 jobs:
    build:
     working_directory: ~/repo
@@ -33,6 +15,8 @@ jobs:
           root: ~/repo
           paths:
             - node_modules  
+      - store_test_results:
+          path: ~/repo/junit.xml
     test:
       working_directory: ~/repo
       docker:
@@ -59,7 +43,6 @@ jobs:
         - store_test_results:
           path: ~/root/android/reports
 
-
 workflows:
   version: 2
   node-android:
@@ -75,4 +58,3 @@ workflows:
           requires:
             - test
             - build
-
