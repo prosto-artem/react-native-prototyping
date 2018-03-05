@@ -52,3 +52,6 @@ workflows:
     - test:
         requires:
           - build
+    - android:
+        requires:
+          - build
