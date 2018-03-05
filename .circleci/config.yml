@@ -47,14 +47,8 @@ workflows:
   version: 2
   node-android:
     jobs:
-      - build:
-          filters:
-            tags:
-              ignore: /^testing
-      - test   
-          requires:
-            - test
-      - android:
-          requires:
-            - test
-            - build
+    - build
+    - android:
+        requires:
+          - build      
+      
