@@ -26,21 +26,21 @@ jobs:
       - persist_to_workspace:
           root: ~/repo
           paths:
-            - node_modules       
-    android:
-      working_directory: ~/repo/android
-      docker:
-        - image: circleci/android:api-27-node8-alpha
-      steps:
-        - checkout:
-            path: ~/repo
-        - attach_workspace:
-            at: ~/repo
-        - run: bundle install
-        #- run: bundle exec fastlane test
-        - store_test_results:
-          path: ~/root/android/reports
-
+            - node_modules
+   android:
+    working_directory: ~/repo/android
+    docker:
+      - image: circleci/android:api-27-node8-alpha
+    steps:
+      - checkout:
+          path: ~/repo
+      - attach_workspace:
+          at: ~/repo
+      - run: bundle install
+      - run: bundle exec fastlane test
+      - store_test_results:
+          path: ~/repo/android/reports
+  
 workflows:
   version: 2
   node-android:
