@@ -15,20 +15,18 @@ jobs:
           root: ~/repo
           paths:
             - node_modules  
-      - store_test_results:
-          path: ~/repo/junit.xml
     test:
-      working_directory: ~/repo
-      docker:
-        - image: circleci/node:8.9.0
-      steps:
-        - checkout
-        - run: yarn install
-        - run: npm test
-        - persist_to_workspace:
-            root: ~/repo
-            paths:
-              - node_modules         
+    working_directory: ~/repo
+    docker:
+      - image: circleci/node:8
+    steps:
+      - checkout
+      - run: yarn install
+      - run: npm test
+      - persist_to_workspace:
+          root: ~/repo
+          paths:
+            - node_modules       
     android:
       working_directory: ~/repo/android
       docker:
@@ -48,7 +46,6 @@ workflows:
   node-android:
     jobs:
     - build
-    - android:
+    - test:
         requires:
-          - build      
-      
+          - build
