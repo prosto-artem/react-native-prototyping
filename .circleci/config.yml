@@ -36,8 +36,7 @@ jobs:
           path: ~/repo
       - attach_workspace:
           at: ~/repo
-      - run: bundle install
-      - run: bundle exec fastlane test
+      - run: ./gradlew assembleRelease
       - store_test_results:
           path: ~/repo/android/reports
   
