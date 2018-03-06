@@ -38,8 +38,9 @@ jobs:
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
       - attach_workspace:
           at: ~/repo
-      - run: sudo chmod +x ./gradlew
+      - run: set TERM=${TERM:-dumb}
       - run: export TERM=${TERM:-dumb}
+      - run: sudo chmod +x ./gradlew
       - run: ./gradlew assembleRelease
       - save_cache:
           paths:
