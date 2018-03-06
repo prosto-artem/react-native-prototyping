@@ -39,7 +39,8 @@ jobs:
       - attach_workspace:
           at: ~/repo
       - run: sudo chmod +x ./gradlew
-      - run: export TERM=${TERM:-dumb} && ./gradlew assembleRelease
+      - run: export TERM=${TERM:-dumb}
+      - run: ./gradlew assembleRelease
       - save_cache:
           paths:
             - ~/.gradle
