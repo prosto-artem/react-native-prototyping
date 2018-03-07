@@ -39,7 +39,7 @@ jobs:
       - attach_workspace:
           at: ~/repo
       - run: ./gradlew androidDepedencies    
-      - run: export $TERM=xterm   
+      - run: export TERM=dumb   
       - run: sudo chmod +x ./gradlew
       - run: ./gradlew assembleRelease
       - save_cache:
