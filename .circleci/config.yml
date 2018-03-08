@@ -38,10 +38,9 @@ jobs:
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
       - attach_workspace:
           at: ~/repo
-      - run: ./gradlew androidDepedencies    
-      - run: export TERM=dumb   
       - run: sudo chmod +x ./gradlew
-      - run: ./gradlew assembleRelease
+      - run: export TERM=xterm && ./gradlew androidDepedencies    
+      - run: export TERM=xterm && ./gradlew assembleRelease
       - save_cache:
           paths:
             - ~/.gradle
