@@ -32,13 +32,13 @@ class AppView extends Component {
   }
 
   render() {
-    // if (!this.props.isReady) {
-    //   return (
-    //     <View style={{flex: 1}}>
-    //       <ActivityIndicator style={styles.centered} />
-    //     </View>
-    //   );
-    // }
+    if (!this.props.isReady) {
+      return (
+        <View style={{flex: 1}}>
+          <ActivityIndicator style={styles.centered} />
+        </View>
+      );
+    }
 
     return (
       <View style={{flex: 1}}>

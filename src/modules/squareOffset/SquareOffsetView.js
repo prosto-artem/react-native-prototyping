@@ -141,7 +141,7 @@ class SquareOffsetView extends Component {
           />
           <Overlay isVisible={this.props.isVisible}>
                 <Image resizeMode='cover'
-                  source={require('../../images/diagram2-1.png')} style={styles.largeImage}
+                  source={require('../../images/diagram2-1@2x.png')} style={styles.largeImage}
                 />
                 <Button large warning
                   accessible={true}
@@ -160,12 +160,14 @@ class SquareOffsetView extends Component {
           <AwesomeAlert
             show={this.state.showAlert}
             title='Input Error'
-            message='Input at least 2 values..'
+            message='Input at least 2 values to calculate offset.'
+            messageStyle={styles.awesomeAlertText}
             closeOnTouchOutside={true}
             closeOnHardwareBackPress={true}
             showCancelButton={false}
             showConfirmButton={true}
-            confirmText='Ok'
+            confirmButtonStyle={styles.awesomeAlertButton}
+            confirmText='Re-enter values'
             confirmButtonColor='#DD6B55'
             onConfirmPressed={() => {
               this.hideAlert();
@@ -204,6 +206,13 @@ const styles = StyleSheet.create({
     backgroundColor: '#ecf0f1',
     padding: 5,
     margin: 5
+  },
+  awesomeAlertButton: {
+    minHeight: '10%'
+  },
+  awesomeAlertText: {
+    maxWidth: '90%',
+    flexWrap: 'wrap'
   },
   buttonTextStlye:
   {

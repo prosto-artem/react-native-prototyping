@@ -28,7 +28,7 @@ describe('squareOffsetState', () => {
       const [secondState] = dispatch(initialState, SquareOffsetStateActions.increment());
       expect(getrunValue(secondState)).toBe(getrunValue(initialState) + 1);
 
-    });
+    }); 
   });
 
   describe('toggleVisibility', () => {
