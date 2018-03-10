@@ -30,7 +30,7 @@ jobs:
    android:
     working_directory: ~/repo/android
     docker:
-      - image: circleci/android:api-23-node8-alpha
+      - image: circleci/android:api-24-node8-alpha
     steps:
       - checkout:
           path: ~/repo
@@ -38,9 +38,10 @@ jobs:
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
       - attach_workspace:
           at: ~/repo
+      - run: echo 'export TERM=xterm' >> $BASH_ENV
       - run: sudo chmod +x ./gradlew
-      - run: export TERM=xterm && ./gradlew androidDepedencies    
-      - run: export TERM=xterm && ./gradlew assembleRelease
+      - run: ./gradlew androidDepedencies    
+      - run: ./gradlew assembleRelease
       - save_cache:
           paths:
             - ~/.gradle
