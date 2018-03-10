@@ -30,7 +30,7 @@ jobs:
    android:
     working_directory: ~/repo/android
     docker:
-      - image: circleci/android:api-23-alpha
+      - image: circleci/android:api-23-node8-alpha
     steps:
       - checkout:
           path: ~/repo
