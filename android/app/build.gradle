@@ -85,7 +85,10 @@ def enableProguardInReleaseBuilds = false
 android {
     compileSdkVersion 24
     buildToolsVersion "24.0.1"
-
+    
+    android {
+        useLibrary 'org.apache.http.legacy'
+    }
     defaultConfig {
         applicationId "com.simpleoffsetpro"
         minSdkVersion 16
