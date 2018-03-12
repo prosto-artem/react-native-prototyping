@@ -34,21 +34,11 @@ jobs:
     steps:
       - checkout:
           path: ~/repo
-      - restore_cache:
-          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
       - attach_workspace:
           at: ~/repo
       - run: echo 'export TERM=xterm' >> $BASH_ENV
-      - run: sudo chmod +x ./gradlew
-      - run: ./gradlew androidDepedencies    
-      - run: ./gradlew assembleRelease
-      - save_cache:
-          paths:
-            - ~/.gradle
-          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
-      - store_test_results:
-          path: ~/repo/android/reports
-  
+      - run: bundle install  
+      
 workflows:
   version: 2
   node-android:
