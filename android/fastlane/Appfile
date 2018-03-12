@@ -1,0 +1,2 @@
+json_key_file "./gplay-10555e57e15c.json" # Path to the json secret file - Follow https://github.com/fastlane/supply#setup to get one
+package_name "com.simpleoffsetpro.app" # e.g. com.krausefx.app
