@@ -1,9 +1,10 @@
 /*eslint-disable max-nested-callbacks*/
 
 import React from 'react';
-import {TouchableOpacity, Text} from 'react-native';
+import {Text} from 'react-native';
 import {shallow} from 'enzyme';
 import {hasStyles} from '../../../test/assertions';
+import {Button} from 'native-base';
 
 import TabBarButton from '../TabBarButton';
 
@@ -14,7 +15,7 @@ describe('<TabBarButton/>', () => {
       <TabBarButton text='TestButton' isSelected={true} action={() => null} />
     );
 
-    expect(wrapper.contains(<Text>TestButton</Text>)).toBe(true);
+    expect(wrapper.text()).to.equal('TestButton');
   });
 
   it('should respond to press events', () => {
@@ -25,7 +26,7 @@ describe('<TabBarButton/>', () => {
 
     expect(onPress.mock.calls.length).toBe(0);
 
-    wrapper.find(TouchableOpacity).simulate('press');
+    wrapper.find(Button).simulate('press');
     expect(onPress).toBeCalled();
   });
 
@@ -38,7 +39,7 @@ describe('<TabBarButton/>', () => {
       <TabBarButton text='TestButton' action={() => null} isSelected={true} />
     );
 
-    expect(hasStyles(unselected.first(), {backgroundColor: 'yellow'})).toBe(false);
-    expect(hasStyles(selected.first(), {backgroundColor: 'yellow'})).toBe(true);
+    expect(hasStyles(unselected.first(), {backgroundColor: '#FFA500'})).toBe(false);
+    expect(hasStyles(selected.first(), {backgroundColor: '#FFA500'})).toBe(true);
   });
 });

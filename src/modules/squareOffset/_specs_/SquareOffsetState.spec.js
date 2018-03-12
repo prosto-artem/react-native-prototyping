@@ -1,34 +1,10 @@
 /*eslint-disable max-nested-callbacks, no-unused-expressions*/
 
-import {Effects} from 'redux-loop-symbol-ponyfill';
+// import {Effects} from 'redux-loop-symbol-ponyfill';
 import {initialState, dispatch} from '../../../../test/state';
 import * as SquareOffsetStateActions from '../SquareOffsetState';
 
-describe('SquareOffsetState', () => {
-
-
-
-  describe('reset', () => {
-    it('should reset state to initial values', () => {
-      // create an incremented state to test against
-      const [modifiedState] = dispatch(initialState, SquareOffsetStateActions.increment());
-      expect(modifiedState.get('set')).not.toBe(initialState.get('set'));
-      expect(modifiedState.get('travel')).not.toBe(initialState.get('travel'));
-      expect(modifiedState.get('run')).not.toBe(initialState.get('run'));
-      
-
-      // reset to original and verify it === initial state
-      const [resetState] = dispatch(modifiedState, SquareOffsetStateActions.reset());
-      expect(resetState.get('set')).toBe(initialState.get('set'));
-      expect(resetState.get('travel')).toBe(initialState.get('travel'));
-      expect(resetState.get('run')).toBe(initialState.get('run'));
-      
-    });
-  });
-
-});
-
-describe('SquareOffsetState', () => {
+describe('squareOffsetState', () => {
 
   // Example of how to test multiple dispatches in series
   describe('increment', () => {
@@ -52,14 +28,16 @@ describe('SquareOffsetState', () => {
       const [secondState] = dispatch(initialState, SquareOffsetStateActions.increment());
       expect(getrunValue(secondState)).toBe(getrunValue(initialState) + 1);
 
-    });
+    }); 
   });
 
   describe('toggleVisibility', () => {
+
+
     const getIsVisible = state => state.getIn(['squareOffset', 'isVisible']);
 
     it('should toggle the value between true and false', () => {
-      const [secondState] = dispatch(initialState, SquareOffsetStateActions.increment());
+      const [secondState] = dispatch(initialState, SquareOffsetStateActions.toggleVisibility());
       expect(getIsVisible(secondState)).toBe(!getIsVisible('isVisible'));
 
     });
@@ -86,22 +64,19 @@ describe('SquareOffsetState', () => {
     });
   });
 
-  // Example of how to test side effects returned from reducers
   describe('calculate', () => {
 
-    const [nextState, effects] = dispatch(initialState, SquareOffsetStateActions.calculate());
+    let setValue = 5.5;
+    let travelValue = 8.9;
 
-    it('should update loading bit', () => {
-      expect(nextState.getIn(['squareOffset', 'set'])).toBe(true);
-      expect(nextState.getIn(['squareOffset', 'travel'])).toBe(true);
-      expect(nextState.getIn(['squareOffset', 'run'])).toBe(true);
+    const [modifiedState] = dispatch(initialState, SquareOffsetStateActions.calculate(setValue,travelValue));
+
+    it('should calculate the missing value from two numeric inputs', () => {
+      expect(modifiedState.getIn(['squareOffset', 'set'])).toBeDefined;
+      expect(modifiedState.getIn(['squareOffset', 'travel'])).toBeDefined;
+      expect(modifiedState.getIn(['squareOffset', 'run'])).toBeDefined;
     });
 
-    it('should Calculator effect', () => {
-      expect(effects).toEqual(
-        Effects.promise(SquareOffsetStateActions)
-      );
-    });
   });
 
 });
