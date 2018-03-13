@@ -39,7 +39,7 @@ yarn-error.log
 
 # Secrets
 env.js
-
+Google Play Android Developer-10555e57e15c.json
 # BUCK
 buck-out/
 \.buckd/

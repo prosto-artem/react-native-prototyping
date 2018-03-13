@@ -2,6 +2,9 @@ apply plugin: "com.android.application"
 
 import com.android.build.OutputFile
 
+def releasekeypass = "***"
+def releasekeyalias = "***"
+
 /**
  * The react.gradle file registers a task for each build variant (e.g. bundleDebugJsAndAssets
  * and bundleReleaseJsAndAssets).
@@ -104,8 +107,20 @@ android {
             include "armeabi-v7a", "x86"
         }
     }
-    buildTypes {
+    signingConfigs {
         release {
+            storeFile file(MYAPP_RELEASE_STORE_FILE)
+            storePassword releasekeypass
+            keyAlias MYAPP_RELEASE_KEY_ALIAS
+            keyPassword releasekeyalias
+        }
+    }
+    buildTypes {
+        debug {
+            signingConfig null
+        }
+        release {
+            signingConfig signingConfigs.release
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
