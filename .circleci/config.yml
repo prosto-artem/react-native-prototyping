@@ -37,7 +37,8 @@ jobs:
       - attach_workspace:
           at: ~/repo
       - run: echo 'export TERM=xterm' >> $BASH_ENV
-      - run: bundle install  
+      - run: bundle install 
+      - run: bundle exec fastlane debugBuild 
       - store_artifacts:
           path: app/build/outputs/apk
           destination: apk
