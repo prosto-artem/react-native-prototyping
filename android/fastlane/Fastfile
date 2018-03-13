@@ -34,6 +34,12 @@ platform :android do
     # You can also use other beta testing services here
   end
 
+  desc "Build a debug version of the APK file"
+  lane :debugBuild do
+    gradle(task: "assembleDebug")
+    supply
+  end
+
   desc "Deploy a new version to the Google Play"
   lane :deploy do
     gradle(task: "assembleRelease")
