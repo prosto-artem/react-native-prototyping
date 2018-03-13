@@ -86,13 +86,9 @@ def enableSeparateBuildPerCPUArchitecture = false
 def enableProguardInReleaseBuilds = false
 
 android {
+    useLibrary 'org.apache.http.legacy'
     compileSdkVersion 23
     buildToolsVersion "23.0.2"
-    useLibrary 'org.apache.http.legacy'
-    
-    android {
-        useLibrary 'org.apache.http.legacy'
-    }
 
     defaultConfig {
         applicationId "com.simpleoffsetpro"
