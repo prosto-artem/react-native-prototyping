@@ -55,10 +55,6 @@ jobs:
         - attach_workspace:
             at: ~/repo
         - run: bundle install
-        #- run: bundle exec fastlane test
-        - store_test_results:
-          path: ~/root/android/reports
-
 
 workflows:
   version: 2
