@@ -39,6 +39,7 @@ jobs:
       - run: echo 'export TERM=xterm' >> $BASH_ENV
       - run: echo y | android update sdk --no-ui --all --filter "tools"
       - run: echo y | android update sdk --no-ui --all --filter "build-tools-23.0.2"
+      - run: echo y | android update sdk --no-ui --all --filter "build-tools-23.0.1"
       - run: sudo chmod +x ./gradlew
       - run: bundle install 
       - run: bundle exec fastlane debugBuild 
