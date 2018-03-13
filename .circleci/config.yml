@@ -30,7 +30,7 @@ jobs:
    android:
     working_directory: ~/repo/android
     docker:
-      - image: circleci/android:api-24-node8-alpha
+      - image: circleci/android:api-23-node8-alpha
     steps:
       - checkout:
           path: ~/repo
@@ -38,7 +38,7 @@ jobs:
           at: ~/repo
       - run: echo 'export TERM=xterm' >> $BASH_ENV
       - run: echo y | android update sdk --no-ui --all --filter "tools"
-      - run: echo y | android update sdk --no-ui --all --filter "build-tools-24.0.1"
+      - run: echo y | android update sdk --no-ui --all --filter "build-tools-23.0.1"
       - run: sudo chmod +x ./gradlew
       - run: bundle install 
       - run: bundle exec fastlane debugBuild 
