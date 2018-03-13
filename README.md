@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/BrianJVarley/react-native-prototyping/tree/dev.svg?style=svg)](https://circleci.com/gh/BrianJVarley/react-native-prototyping/tree/dev)
+
 # simple-offset-pro
 A react-native implementation of one of my portfolio apps originally developed in Android.
 The aim of this repo is to improve the original application and deploy in both iOS and Android platforms. 
