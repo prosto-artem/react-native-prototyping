@@ -38,10 +38,10 @@ describe('<TabBar />', () => {
       .toEqual([false, true, false]);
   });
 
-  it('should apply custom height to the root element', () => {
+  it('should apply custom height to the root view', () => {
     const wrapper = shallow(
       <TabBar tabs={tabs} height={123} currentTabIndex={1} switchTab={() => null} />
     );
-    expect(hasStyles(wrapper.first(), {height: 123})).toBe(true);
+    expect(hasStyles(wrapper.childAt(0), {height: 123})).toBe(true);
   });
 });

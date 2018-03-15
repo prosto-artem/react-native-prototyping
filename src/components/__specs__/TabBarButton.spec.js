@@ -15,7 +15,9 @@ describe('<TabBarButton/>', () => {
       <TabBarButton text='TestButton' isSelected={true} action={() => null} />
     );
 
-    expect(wrapper.text()).to.equal('TestButton');
+    expect(wrapper.find(Text).exists()).toEqual(true);
+    expect(wrapper.find(Text).text()).toEqual('<Text />');
+
   });
 
   it('should respond to press events', () => {
