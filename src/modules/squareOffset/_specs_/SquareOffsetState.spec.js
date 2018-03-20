@@ -27,22 +27,19 @@ describe('squareOffsetState', () => {
     it('should increment the run property by one', () => {
       const [secondState] = dispatch(initialState, SquareOffsetStateActions.increment());
       expect(getrunValue(secondState)).toBe(getrunValue(initialState) + 1);
-
-    }); 
+    });
   });
 
-  // describe('toggleVisibility', () => {
+  describe('toggleVisibility', () => {
+    const getIsVisible = state => state.getIn(['squareOffset', 'isVisible']);
 
+    it('should toggle the isVisible value between true and false', () => {
+      const [secondState] = dispatch(initialState, SquareOffsetStateActions.toggleVisibility());
+      expect(getIsVisible(secondState)).not.toBe(getIsVisible(initialState));
 
-  //   const getIsVisible = state => state.getIn(['squareOffset', 'isVisible']);
+    });
 
-  //   it('should toggle the value between true and false', () => {
-  //     const [secondState] = dispatch(initialState, SquareOffsetStateActions.toggleVisibility());
-  //     expect(getIsVisible(secondState)).toBe(!getIsVisible('isVisible'));
-
-  //   });
-
-  // });
+  });
 
   describe('reset', () => {
     it('should reset the set state to initial value', () => {
