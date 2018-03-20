@@ -116,7 +116,8 @@ class SquareOffsetView extends Component {
               source={require('../../images/diagram2-1@2x.png')}/>
          </TouchableOpacity>
             <Badge primary style={{marginBottom: 5}}>
-              <Text style={{fontSize: 15, color: '#fff', lineHeight: 21}}>Measurement Units: Centimetre (CM)</Text>
+              <Icon name='md-settings' style={{color: '#fff'}}/>
+              <Text style={{fontSize: 15, color: '#fff', lineHeight: 21}}>U/M: Centimetre (CM)</Text>
             </Badge>
           <FloatLabelTextInput
           placeholder={'Set'}

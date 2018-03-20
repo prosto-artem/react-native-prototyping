@@ -24,7 +24,7 @@ class TabBarButton extends Component {
           backgroundColor: '#FFA500'
         }}
         >
-        <Icon style={{color: '#fff'}} name='md-hammer'/><Text style={{color: '#fff'}}>{this.props.text}</Text>
+        <Icon style={{color: '#fff'}} name='md-construct'/><Text style={{color: '#fff'}}>{this.props.text}</Text>
       </Button>
     ) : (<Button light large
     onPress={this.props.action}
@@ -35,7 +35,7 @@ class TabBarButton extends Component {
 
     }}
     >
-    <Icon style={{color: '#fff'}} name='md-square'/><Text style={{color: '#fff'}}>{this.props.text}</Text>
+    <Icon style={{color: '#fff'}} name='md-hammer'/><Text style={{color: '#fff'}}>{this.props.text}</Text>
   </Button>);
   }
 }

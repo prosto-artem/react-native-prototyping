@@ -5,6 +5,7 @@ import * as snapshotUtil from '../utils/snapshot';
 import * as SessionStateActions from '../modules/session/SessionState';
 import store from '../redux/store';
 import DeveloperMenu from '../components/DeveloperMenu';
+import MenuProvider from 'react-native-popup-menu';
 
 class AppView extends Component {
   static displayName = 'AppView';
@@ -42,8 +43,10 @@ class AppView extends Component {
 
     return (
       <View style={{flex: 1}}>
+      <MenuProvider>
         <NavigationViewContainer />
         {__DEV__ && <DeveloperMenu />}
+      </MenuProvider>
       </View>
     );
   }
