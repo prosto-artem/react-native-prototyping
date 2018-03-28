@@ -5,7 +5,9 @@ import Overlay from 'react-native-overlay';
 import FloatLabelTextInput from 'react-native-floating-label-text-input';
 import {Button,Badge,Icon} from 'native-base';
 import AwesomeAlert from 'react-native-awesome-alerts';
-import dismissKeyboard from 'react-native-dismiss-keyboard';
+import DismissKeyboard from 'react-native-dismiss-keyboard';
+import SettingMenu from '../../components/SettingMenu';
+
 
 const ScreenWidth = Dimensions.get('window').width;
 
@@ -108,7 +110,7 @@ class SquareOffsetView extends Component {
   render() {
 
     return (
-      <TouchableWithoutFeedback onPress={ () => { dismissKeyboard(); } }>
+      <TouchableWithoutFeedback onPress={ () => { DismissKeyboard(); } }>
         <View style={styles.container}>
          <TouchableOpacity style={styles.image} onPress={this.toggleVisibility}>
           <Image

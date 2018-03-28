@@ -1,7 +1,8 @@
-import React, {Component} from 'react';
+import React,{PropTypes,Component} from 'react';
 import {
   StyleSheet,
-  View
+  View,
+  Text
 } from 'react-native';
 import {
   Menu,
@@ -12,23 +13,33 @@ import {
 
 class SettingMenu extends Component {
 
-render() {
+  static propTypes = {
+    menuTitle: PropTypes.string.isRequired
+  };
+
+  render() {
     return (
       <View>
         <Menu>
-        <MenuTrigger text='Select action' />
+        <MenuTrigger text={this.props.menuTitle} />
         <MenuOptions>
-            <MenuOption onSelect={() => alert(`Save`)} text='Save' />
-            <MenuOption onSelect={() => alert(`Delete`)} >
+            <MenuOption onSelect={() => alert('Save')} text='Save' />
+            <MenuOption onSelect={() => alert('Delete')} >
             <Text style={{color: 'red'}}>Delete</Text>
             </MenuOption>
-            <MenuOption onSelect={() => alert(`Not called`)} disabled={true} text='Disabled' />
+            <MenuOption onSelect={() => alert('Not called')} disabled={true} text='Disabled' />
         </MenuOptions>
         </Menu>
     </View>
     );
+  }
 }
 
 const styles = StyleSheet.create({
+  buttonWrapper: {
+    flex: 1,
+    position: 'relative'
+  }
 });
+
 export default SettingMenu;
