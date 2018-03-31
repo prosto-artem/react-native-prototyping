@@ -6,7 +6,7 @@ import FloatLabelTextInput from 'react-native-floating-label-text-input';
 import {Button,Badge,Icon} from 'native-base';
 import AwesomeAlert from 'react-native-awesome-alerts';
 import DismissKeyboard from 'react-native-dismiss-keyboard';
-import SettingMenu from '../../components/SettingMenu';
+import SettingMenu from '../settings/SettingMenu';
 
 
 const ScreenWidth = Dimensions.get('window').width;
@@ -117,9 +117,9 @@ class SquareOffsetView extends Component {
               style={styles.image}
               source={require('../../images/diagram2-1@2x.png')}/>
          </TouchableOpacity>
-            <Badge primary style={{marginBottom: 5}}>
+            <Badge primary style={{flex: .5,flexDirection: 'row', justifyContent: 'space-between'}}>
               <Icon name='md-settings' style={{color: '#fff'}}/>
-              <Text style={{fontSize: 15, color: '#fff', lineHeight: 21}}>U/M: Centimetre (CM)</Text>
+              <SettingMenu />
             </Badge>
           <FloatLabelTextInput
           placeholder={'Set'}
