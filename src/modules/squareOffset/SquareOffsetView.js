@@ -117,7 +117,7 @@ class SquareOffsetView extends Component {
               style={styles.image}
               source={require('../../images/diagram2-1@2x.png')}/>
          </TouchableOpacity>
-            <Badge primary style={{flex: .5,flexDirection: 'row', justifyContent: 'space-between'}}>
+            <Badge primary style={{flex: .5,flexDirection: 'row'}}>
               <Icon name='md-settings' style={{color: '#fff'}}/>
               <SettingMenu />
             </Badge>
