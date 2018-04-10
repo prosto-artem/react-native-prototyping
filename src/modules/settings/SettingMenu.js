@@ -2,7 +2,6 @@ import React,{PropTypes,Component} from 'react';
 import {
   StyleSheet,
   View,
-  Dimensions,
   Text
 } from 'react-native';
 import {
@@ -15,7 +14,7 @@ import {
 class SettingMenu extends Component {
 
   static propTypes = {
-    meausurementUnits: PropTypes.string.isRequired
+    //meausurementUnits: PropTypes.string.isRequired
   };
 
   constructor(props) {
@@ -43,8 +42,8 @@ class SettingMenu extends Component {
             <Text style={styles.menuTitle}>{this.state.menuTitle}</Text>
           </MenuTrigger>
           <MenuOptions>
-            <MenuOption onSelect={this.onCmUnitsSelected} text='CM' />
-            <MenuOption onSelect={this.onInchUnitsSelected} text='Inch' />
+            <MenuOption onSelect={this.onCmUnitsSelected} text='Centimetres (CM)' />
+            <MenuOption onSelect={this.onInchUnitsSelected} text='Inches (")' />
           </MenuOptions>
         </Menu>
       </View>
@@ -55,12 +54,14 @@ class SettingMenu extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 0,
-    flexDirection: 'row'
+    flexDirection: 'row',
+    marginLeft: 5,
+    marginTop: 4
+
   },
   menuTitle: {
     color: '#fff',
     textAlign: 'center'
-
   }
 
 });
