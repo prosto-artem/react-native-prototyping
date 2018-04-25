@@ -143,7 +143,7 @@ class SquareOffsetView extends Component {
           onChangeTextValue={this.onChangeRunValue}
           />
           <Overlay isVisible={this.props.isVisible}>
-                <Image resizeMode='cover'
+                <Image resizeMode='stretch'
                   source={require('../../images/diagram2-1@2x.png')} style={styles.largeImage}
                 />
                 <Button large warning
